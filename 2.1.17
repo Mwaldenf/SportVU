@@ -5,9 +5,9 @@ tree = ET.parse("ALL DATA H1.XML")
 root = tree.getroot()
 
 for moment in root.iter("moment"):  
-    print(moment.attrib)   #gets all the attribute within the tag, in this case the moment's attributes
+    #print(moment.attrib)   #gets all the attribute within the tag, in this case the moment's attributes
     locations = moment.get("locations")  
-    print(locations) #gets all the location numbers
+    #print(locations) #gets all the location numbers
     for char in locations: #gets the ball coordinates (the first 5 numbers)
         if char == ";":
             spot = locations.index(char)   #finds the index of the first semicolon
