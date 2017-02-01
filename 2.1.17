@@ -13,6 +13,6 @@ for moment in root.iter("moment"):
             spot = locations.index(char)   #finds the index of the first semicolon
             print([locations[0:spot]])   #prints from the beginning to the semicolon
             break   #stops the program from running through the rest of the list
-
-
-ball = []
+            ball = []
+            ball.append(locations[0:spot])
+            print(ball)
