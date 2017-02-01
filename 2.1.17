@@ -26,40 +26,27 @@ print(ball)
  for moment in root.iter("moment"):
     locations = moment.get("locations")
     places = locations.split(";")   #splits location data
-    print(places[0]) #imput numbers for different variable needs
-    print(places[1])
-    print(places[2])
-    print(places[3])
-    print(places[4])
-    print(places[5])
-    print(places[6])
-    print(places[7])
-    print(places[8])
-    print(places[9])
-    print(places[10])
-    print(places[11])
-    print(places[12])
-    print(places[13])
+    #imput numbers for different variable needs
+    ball = places[0]
+    T1P1 = places[1]
+    T1P2 = places[2]    
+    T1P3 = places[3]
+    T1P4 = places[4]
+    T1P5 = places[5]
+    T2P1 = places[6]
+    T2P2 = places[7]
+    T2P3 = places[8]
+    T2P4 = places[9]
+    T2P5 = places[10]
+    R1 = places[11]
+    R2 = places[12]
+    R3 = places[13]  #sometimes this throws up an "index invalid" error
+    T1 = places[1:6]
+    T2 = places[6:11]
     
-ball = places[0]
-T1P1 = places[1]
-T1P2 = places[2]
-T1P3 = places[3]
-T1P4 = places[4]
-T1P5 = places[5]
-T2P1 = places[6]
-T2P2 = places[7]
-T2P3 = places[8]
-T2P4 = places[9]
-T2P5 = places[10]
-R1 = places[11]
-R2 = places[12]
-R3 = places[13]
-T1 = places[1:6]
-T2 = places[6:11]
 
-''' lines 9 through 21 are made obselete by lines 24 through 59
+
+''' lines 9 through 21 are made obselete by lines 246 through 45
 and work for all different items
-also the print function does not work properly unless put in after
-the for loop but before the list of variables
-that are being defined''' 
+also the print function does not work properly unless put indented after
+the for loop that are being defined''' 
