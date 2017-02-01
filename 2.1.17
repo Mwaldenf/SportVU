@@ -22,10 +22,20 @@ print(ball)
 
 
 #for all of them
-ball = []
-home = []
-away = [] 
-ref = []
+ball = [0]
+T1P1 = [1]
+T1P2 = [2]
+T1P3 = [3]
+T1P4 = [4]
+T1P5 = [5]
+T2P1 = [6]
+T2P2 = [7]
+T2P3 = [8]
+T2P4 = [9]
+T2P5 = [10]
+R1 = [11]
+R2 = [12]
+
 
 for moment in root.iter("moment"):
     locations = moment.get("locations")
