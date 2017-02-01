@@ -1,19 +1,20 @@
 #2.1.17
+#this imports the xml data files so that we can access them to pull out specific data
 import xml.etree.ElementTree as ET
 
 tree = ET.parse("ALL DATA H1.XML")
 root = tree.getroot()
 
-ball = []
+ball = [] #sets an empty list to put the ball coordinates in 
 
 for moment in root.iter("moment"):  
     #print(moment.attrib)   #gets all the attribute within the tag, in this case the moment's attributes
     locations = moment.get("locations")  
-    #print(locations) #gets all the location numbers
-    for char in locations: #gets the ball coordinates (the first 5 numbers)
+    #print(locations) #gets all numbers in location tag 
+    for char in locations: #gets the ball coordinates (the last 3 numbers that belong to ball)
         if char == ";":
             spot = locations.index(char)   #finds the index of the first semicolon
-            #print([locations[0:spot]])   #prints from the beginning to the semicolon
-            ball.append(locations[0:spot])
+            #print([locations[6:spot]])   #prints from the x coordinate to the semicolon
+            ball.append(locations[6:spot]) #appends coordinates to ball list
             break   #stops the program from running through the rest of the list
 print(ball)
