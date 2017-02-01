@@ -19,3 +19,15 @@ for moment in root.iter("moment"):
             ball.append(locations[6:spot]) #appends coordinates to ball list
             break   #stops the program from running through the rest of the list
 print(ball)
+
+
+#for all of them
+ball = []
+home = []
+away = [] 
+ref = []
+
+for moment in root.iter("moment"):
+    locations = moment.get("locations")
+    places = locations.split(";")   #splits location data
+    print(places[ : ])   #imput numbers for different variable needs
