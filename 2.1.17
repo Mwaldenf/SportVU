@@ -4,6 +4,8 @@ import xml.etree.ElementTree as ET
 tree = ET.parse("ALL DATA H1.XML")
 root = tree.getroot()
 
+ball = []
+
 for moment in root.iter("moment"):  
     #print(moment.attrib)   #gets all the attribute within the tag, in this case the moment's attributes
     locations = moment.get("locations")  
@@ -11,8 +13,7 @@ for moment in root.iter("moment"):
     for char in locations: #gets the ball coordinates (the first 5 numbers)
         if char == ";":
             spot = locations.index(char)   #finds the index of the first semicolon
-            print([locations[0:spot]])   #prints from the beginning to the semicolon
-            break   #stops the program from running through the rest of the list
-            ball = []
+            #print([locations[0:spot]])   #prints from the beginning to the semicolon
             ball.append(locations[0:spot])
-            print(ball)
+            break   #stops the program from running through the rest of the list
+print(ball)
