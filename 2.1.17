@@ -30,4 +30,17 @@ ref = []
 for moment in root.iter("moment"):
     locations = moment.get("locations")
     places = locations.split(";")   #splits location data
-    print(places[ : ])   #imput numbers for different variable needs
+    print(places[0]) #imput numbers for different variable needs
+    print(places[1])
+    print(places[2])
+    print(places[3])
+    print(places[4])
+    print(places[5])
+    print(places[6])
+    print(places[7])
+    print(places[8])
+    print(places[9])
+    print(places[10])
+    print(places[11])
+    print(places[12])
+  
