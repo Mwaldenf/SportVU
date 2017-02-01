@@ -4,4 +4,8 @@ import xml.etree.ElementTree as ET
 tree = ET.parse("ALL DATA H1.XML")
 root = tree.getroot()
 
+for moment in child.iter("moment"):  #gets the attribute within the tag, in this case the moment's attributes
+    print(moment.attrib)
+
+
 ball = []
