@@ -57,3 +57,9 @@ R2 = places[12]
 R3 = places[13]
 T1 = places[1:6]
 T2 = places[6:11]
+
+''' lines 9 through 21 are made obselete by lines 24 through 59
+and work for all different items
+also the print function does not work properly unless put in after
+the for loop but before the list of variables
+that are being defined''' 
