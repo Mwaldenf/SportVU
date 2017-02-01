@@ -39,6 +39,7 @@ print(ball)
     print(places[10])
     print(places[11])
     print(places[12])
+    print(places[13])
     
 ball = places[0]
 T1P1 = places[1]
