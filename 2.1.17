@@ -4,11 +4,11 @@ import xml.etree.ElementTree as ET
 tree = ET.parse("ALL DATA H1.XML")
 root = tree.getroot()
 
-for moment in root.iter("moment"):  #gets all the attribute within the tag, in this case the moment's attributes
-    print(moment.attrib)
-    locations = [moment.get("locations")]
-    print(locations) #unorganized at the moment
-    for char in locations:
+for moment in root.iter("moment"):  
+    print(moment.attrib)   #gets all the attribute within the tag, in this case the moment's attributes
+    locations = [moment.get("locations")]  
+    print(locations) #gets all the location numbers
+    for char in locations: #gets the ball coordinates (the first 5 numbers)
         if char == ";":
             print(locations[0:locations.index(char)])
 
