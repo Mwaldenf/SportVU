@@ -6,6 +6,8 @@ root = tree.getroot()
 
 for moment in root.iter("moment"):  #gets all the attribute within the tag, in this case the moment's attributes
     print(moment.attrib)
+    locations = moment.get("locations")
+    print(locations) #REALLY unorganized at the moment
 
 
 ball = []
