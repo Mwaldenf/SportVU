@@ -23,8 +23,7 @@ print(ball)
 
 #for all of them
 
-
-for moment in root.iter("moment"):
+ for moment in root.iter("moment"):
     locations = moment.get("locations")
     places = locations.split(";")   #splits location data
     print(places[0]) #imput numbers for different variable needs
@@ -40,17 +39,19 @@ for moment in root.iter("moment"):
     print(places[10])
     print(places[11])
     print(places[12])
-  
-ball = places[0]
-T1P1 = places[1]
-T1P2 = places[2]
-T1P3 = places[3]
-T1P4 = places[4]
-T1P5 = places[5]
-T2P1 = places[6]
-T2P2 = places[7]
-T2P3 = places[8]
-T2P4 = places[9]
-T2P5 = places[10]
-R1 = places[11]
-R2 = places[12]
+    
+ball = (places[0])
+T1P1 = (places[1])
+T1P2 = (places[2])
+T1P3 = (places[3])
+T1P4 = (places[4])
+T1P5 = (places[5])
+T2P1 = (places[6])
+T2P2 = (places[7])
+T2P3 = (places[8])
+T2P4 = (places[9])
+T2P5 = (places[10])
+R1 = (places[11])
+R2 = (places[12])
+T1 = (places[1:6])
+T2 = (places[6:11])
