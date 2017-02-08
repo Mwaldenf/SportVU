@@ -1,1 +1,13 @@
 #2.8.17
+
+'''this does not do ANYTHING with the actual XML files
+this is only a work in progress that we are working on 
+to eventually apply to the XML files''' 
+
+string = '1,2,3,4,5,6'
+new_string = string.split(",")
+lst = []
+for number in new_string:
+    lst.append(number)
+
+#print(lst)
