@@ -5,9 +5,13 @@ this is only a work in progress that we are working on
 to eventually apply to the XML files''' 
 
 string = '1,2,3,4,5,6'
-new_string = string.split(",")
+new_string = string.split(",") #splits each number as its own string"
 lst = []
 for number in new_string:
-    lst.append(number)
+    lst.append(number) #this appends each number to lst 
 
 #print(lst)
+orange = []
+for number in lst:
+    orange.append(float(number))  #appends each number as a flaot to orange
+print(orange) 
