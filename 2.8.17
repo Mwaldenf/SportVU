@@ -41,6 +41,7 @@ for moment in root.iter("moment"):
     locations = moment.get("locations")
     places = locations.split(";")   #splits location data
     time = moment.get("time")
+    timeslst.append(int(time))
     #imput numbers for different variable needs
     ball.append(places[0])
     T1P1.append(places[1])
@@ -56,3 +57,4 @@ for moment in root.iter("moment"):
     R1.append(places[11])
     R2.append(places[12])
     #R3.append(places[13])   #sometimes throws error
+print(timeslst)
