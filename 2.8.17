@@ -1,5 +1,5 @@
 #2.8.17
-
+'''
 '''this does not do ANYTHING with the actual XML files
 this is only a work in progress that we are working on 
 to eventually apply to the XML files''' 
@@ -15,3 +15,43 @@ orange = []
 for number in lst:
     orange.append(float(number))  #appends each number as a flaot to orange
 print(orange) 
+'''
+
+import xml.etree.ElementTree as ET
+
+tree = ET.parse("5MIN H1.XML")
+root = tree.getroot()
+
+ball = []
+T1P1 = []
+T1P2 = []
+T1P3 = []
+T1P4 = []
+T1P5 = []
+T2P1 = []
+T2P2 = []
+T2P3 = []
+T2P4 = []
+T2P5 = []
+R1 = []
+R2 = []
+R3 = []
+
+for moment in root.iter("moment"):
+    locations = moment.get("locations")
+    places = locations.split(";")   #splits location data
+    #imput numbers for different variable needs
+    ball.append(places[0])
+    T1P1.append(places[1])
+    T1P2.append(places[2])
+    T1P3.append(places[3])
+    T1P4.append(places[4])
+    T1P5.append(places[5])
+    T2P1.append(places[6])
+    T2P2.append(places[7])
+    T2P3.append(places[8])
+    T2P4.append(places[9])
+    T2P5.append(places[10])
+    R1.append(places[11])
+    R2.append(places[12])
+    #R3.append(places[13])   #sometimes throws error
