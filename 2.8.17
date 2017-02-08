@@ -22,6 +22,8 @@ import xml.etree.ElementTree as ET
 tree = ET.parse("5MIN H1.XML")
 root = tree.getroot()
 
+
+#This defines the variables outside of the for loop so it prints anywhere
 ball = []
 T1P1 = []
 T1P2 = []
@@ -43,6 +45,7 @@ for moment in root.iter("moment"):
     time = moment.get("time")
     timeslst.append(int(time))
     #imput numbers for different variable needs
+    #may be moved later
     ball.append(places[0])
     T1P1.append(places[1])
     T1P2.append(places[2])
