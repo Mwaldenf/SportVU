@@ -203,3 +203,8 @@ for item in T2P5:
 print(team1)
 #print(team2)
 '''
+
+import matplotlib.pyplot as plt
+
+for item in ball:  
+    plt.plot(item[0],item[1], "o") #prints a scatterplot of all the ball coordinates!!!!!!!
