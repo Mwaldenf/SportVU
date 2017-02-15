@@ -219,7 +219,7 @@ plt.axes()
 
 rectangle = plt.Rectangle((95, 50), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
-plt.gca().add_patch(rectangle)
+plt.gca().add_patch(rectangle) # gca = get current axis
 
 plt.axis('scaled')
 plt.show()
