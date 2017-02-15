@@ -76,5 +76,66 @@ for item in ball: #organizes ball coordinates into list
     coord = item.split(",")
     thg = [float(x) for x in coord]
     bal.append(thg[2:4]) #looks at only coordinates (x,y) z will be done later 
+#Here we are trying to split the x and y coordinates so that they are organized by team and player.
+#I tried here to first organize by player and then define the team by the players.
+#Maya organized using the team and then the players and that seems to be the better approach
     
-print(bal)
+bal = []
+team1 = [T1P1, T1P2, T1P3, T1P4, T1P5]
+team2 = [T2P1, T2P2, T2P3, T2P4, T2P5]
+#for item in ball:
+for item in T1P1:
+   coord = item.split(",")
+   thg = [float(x) for x in coord]
+   T1P1.append(thg[2:4])
+#print(bal)
+for item in T1P2:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T1P2.append(thg[2:4])
+    
+for item in T1P3:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T1P3.append(thg[2:4])
+    
+for item in T1P4:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T1P4.append(thg[2:4])
+    
+for item in T1P5:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T1P5.append(thg[2:4])
+
+for item in T2P1:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T2P1.append(thg[2:4])
+    
+for item in T2P2:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T2P2.append(thg[2:4])
+    
+for item in T2P3:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T2P3.append(thg[2:4])
+    
+for item in T2P4:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T2P4.append(thg[2:4])
+    
+for item in T2P5:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    T2P5.append(thg[2:4])
+    
+    team1.append(T1P , T2P5)
+    #This doesn't really work but its the beginning of something that could in case our 
+    #method ends up not working but really this is mild trash we will keep as a backup plan
+print(team1)
+#print(team2)
