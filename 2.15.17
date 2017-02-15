@@ -57,6 +57,8 @@ for moment in root.iter("moment"):
         #imput numbers for different variable needs
         #may be moved later
         ball.append(places[0])
+        #removed because of later code
+        '''
         T1P1.append(places[1])
         T1P2.append(places[2])
         T1P3.append(places[3])
@@ -70,7 +72,60 @@ for moment in root.iter("moment"):
         R1.append(places[11])
         R2.append(places[12])
         R3.append(places[13])   #no longer throws error bc of if statement 
-        
+        '''
+
+team1.append(places[1:6])
+    team2.append(places[6:11]) 
+    refs.append(places[11:14])
+
+
+for item in ball:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    bal.append(thg[2:4])
+
+for item in team1:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T1P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T1P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T1P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T1P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T1P5.append(thg[2:4])
+
+for item in team2:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T2P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T2P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T2P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T2P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T2P5.append(thg[2:4])
+            
+for item in refs:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            R1.append(thg[2:4])
+        elif item.index(y) == 1:
+            R2.append(thg[2:4])
+        elif item.index(y) == 2:
+            R3.append(thg[2:4])
+
+'''
 bal = []        
 for item in ball: #organizes ball coordinates into list 
     coord = item.split(",")
