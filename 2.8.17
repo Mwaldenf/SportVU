@@ -38,6 +38,7 @@ T2P5 = []
 R1 = []
 R2 = []
 R3 = []
+timeslst = []
 
 for moment in root.iter("moment"):
     locations = moment.get("locations")
