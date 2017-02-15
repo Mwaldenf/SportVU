@@ -211,7 +211,7 @@ for item in ball:
     
     
 '''this draws a rectangle and a half court
-line, but not together... a work in progress''' 
+line and ball data together... a work in progress''' 
 
 import matplotlib.pyplot as plt
 
@@ -220,7 +220,7 @@ plt.axes()
 rectangle = plt.Rectangle((95, 50), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
 plt.gca().add_patch(rectangle) # gca = get current axis 
-plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=2) #draws a haldcourt line 
+plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=2) #draws a halfcourt line 
 
 for item in ball:  
     plt.plot(item[0],item[1], "o") #prints a scatterplot of all the ball coordinates!!!!!!!
