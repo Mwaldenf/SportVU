@@ -71,6 +71,6 @@ bal = []
 for item in ball:
     coord = item.split(",")
     thg = [float(x) for x in coord]
-    bal.append(thg)
+    bal.append(thg[2:4])
     
 print(bal)
