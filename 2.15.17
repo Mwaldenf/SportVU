@@ -222,6 +222,9 @@ rectangle = plt.Rectangle((95, 50), 94, 50, fill = False,
 plt.gca().add_patch(rectangle) # gca = get current axis 
 plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=2) #draws a haldcourt line 
 
+for item in ball:  
+    plt.plot(item[0],item[1], "o") #prints a scatterplot of all the ball coordinates!!!!!!!
+
 plt.xlim(-5,100)   #sets the axes so you can see the court
 plt.ylim(-5,60)
 plt.show()
