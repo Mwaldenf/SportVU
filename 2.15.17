@@ -219,10 +219,12 @@ plt.axes()
 
 rectangle = plt.Rectangle((95, 50), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
-plt.gca().add_patch(rectangle) # gca = get current axis
+plt.gca().add_patch(rectangle) # gca = get current axis 
+plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=2) #draws a haldcourt line 
 
-plt.axis('scaled')
+plt.xlim(-5,100)   #sets the axes so you can see the court
+plt.ylim(-5,60)
 plt.show()
 
-plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=2) #draws a haldcourt line 
+
 
