@@ -144,10 +144,12 @@ plt.plot([0,14], [3,3], color='k', linestyle='-', linewidth=1)
 plt.plot([0,14], [47,47], color='k', linestyle='-', linewidth=1)
 plt.plot([80,94], [3,3], color='k', linestyle='-', linewidth=1) #back board
 plt.plot([80,94], [47,47], color='k', linestyle='-', linewidth=1)#back board
-circle3 = plt.Circle((5.25,25), radius = 0.75 , fill = False, linestyle = '-') #add hoops
-circle4 = plt.Circle((88.75,25), radius = 0.75, fill = False, linestyle = '-')#add hoops
-plt.gca().add_patch(circle3)
-plt.gca().add_patch(circle4)
+plt.plot([4, 4.5], [25,25], color = 'k', linestyle='-', linewidth=1)#bridge from hoop to backboard
+plt.plot([90, 89.5], [25,25], color = 'k', linestyle='-', linewidth=1)#bridge from hoop to backboard
+hoop1 = plt.Circle((5.25,25), radius = 0.75 , fill = False, linestyle = '-') #add hoops
+hoop2 = plt.Circle((88.75,25), radius = 0.75, fill = False, linestyle = '-')#add hoops
+plt.gca().add_patch(hoop1)
+plt.gca().add_patch(hoop2)
 
 
 
