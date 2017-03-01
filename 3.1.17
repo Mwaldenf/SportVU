@@ -1,1 +1,128 @@
 #3.1.17
+import xml.etree.ElementTree as ET
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+tree = ET.parse("1MIN H1.XML")
+root = tree.getroot()
+
+
+#This defines the variables outside of the for loop so it prints anywhere
+ball = []
+T1P1 = []
+T1P2 = []
+T1P3 = []
+T1P4 = []
+T1P5 = []
+T2P1 = []
+T2P2 = []
+T2P3 = []
+T2P4 = []
+T2P5 = []
+R1 = []
+R2 = []
+R3 = []
+team1 = []
+team2 = []
+refs = []
+bal = []
+
+times = []
+timeslst = []
+
+for moment in root.iter("moment"):
+    locations = moment.get("locations")
+    places = locations.split(";")   #splits location data
+    if len(places) != 14: # if there arent 14 indexes in a place then it skips that moment 
+        del moment
+    else: #runs code as usual 
+        time = moment.get("time")
+        timeslst.append(int(time)) #organizes times into a list 
+        bal.append(places[0])
+        team1.append(places[1:6])
+        team2.append(places[6:11]) 
+        refs.append(places[11:14])
+
+#takes list of points, isolates coordinates, and makes them floats
+for item in bal:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    ball.append(thg[2:4])
+
+#consolidates the team data so we don't have to go through 14 for statements
+for item in team1:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T1P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T1P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T1P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T1P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T1P5.append(thg[2:4])
+
+for item in team2:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T2P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T2P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T2P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T2P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T2P5.append(thg[2:4])
+            
+for item in refs:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            R1.append(thg[2:4])
+        elif item.index(y) == 1:
+            R2.append(thg[2:4])
+        elif item.index(y) == 2:
+            R3.append(thg[2:4])
+
+
+
+#ball animation
+plt.axes()
+
+fig = plt.figure()
+plt.xlim(-5,100)   #sets the axes so you can see the court
+plt.ylim(-5,60)
+line, = plt.plot([],[], color = 'r', marker = '0')
+
+rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
+                          linestyle = '-') #draws the court in the correct dimensions
+plt.gca().add_patch(rectangle) # gca = get current axis 
+plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=2) #draws a halfcourt line 
+
+'''
+for item in ball:  
+    plt.plot(item[0],item[1], "o") #prints a scatterplot of all the ball coordinates!!!!!!!
+'''
+
+def point_data():
+    for frame in ball:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+
+def animate(point_data):                           
+    x, y = point_data[0], point_data[1]        
+    line.set_data(x,y)
+
+            
+anim = animation.FuncAnimation(fig, animate, point_data, interval = 300, repeat = True)
+
+
+plt.show()
