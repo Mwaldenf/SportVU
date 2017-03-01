@@ -100,29 +100,34 @@ fig = plt.figure()
 plt.xlim(-5,100)   #sets the axes so you can see the court
 plt.ylim(-5,60)
 line, = plt.plot([],[], color = 'r', marker = 'o')
+line1, = plt.plot([],[], color = 'b', marker = 'o')
 
 rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
 plt.gca().add_patch(rectangle) # gca = get current axis 
 plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=1) #draws a halfcourt line 
 
-'''
-for item in ball:  
-    plt.plot(item[0],item[1], "o") #prints a scatterplot of all the ball coordinates!!!!!!!
-'''
 
 def ball_data():
     for frame in ball:
         x = frame[0]
         y = frame[1]
         yield x, y
-
 def animate(ball_data):                           
     x, y = ball_data[0], ball_data[1]        
     line.set_data(x,y)
 
+
+def T1P1_data():
+    for frame in T1P1:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate1(T1P1_data):                           
+    x, y = T1P1_data[0], T1P1_data[1]        
+    line1.set_data(x,y)
             
 anim = animation.FuncAnimation(fig, animate, ball_data, interval = 25, repeat = True)
-
+anim1 = animation.FuncAnimation(fig, animate1, T1P1_data, interval = 25, repeat = True)
 
 plt.show()
