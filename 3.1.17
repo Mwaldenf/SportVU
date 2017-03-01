@@ -124,7 +124,11 @@ plt.gca().add_patch(rectangle) # gca = get current axis
 plt.gca().add_patch(rectangle1)
 plt.gca().add_patch(rectangle2)
 plt.gca().add_patch(circle)
-plt.plot([47,47], [0,50], color='k', linestyle='-', linewidth=1) #draws a halfcourt line 
+plt.plot([47,47], [0,50], color='k', linestyle='-', linewidth=1) #draws a halfcourt line
+plt.plot([0,19], [19,19], color='k', linestyle='-', linewidth=1)
+plt.plot([0,19], [31,31], color='k', linestyle='-', linewidth=1)
+plt.plot([75,94], [19,19], color='k', linestyle='-', linewidth=1)
+plt.plot([75,94], [31,31], color='k', linestyle='-', linewidth=1)
 
 
 def ball_data():
