@@ -104,7 +104,7 @@ line, = plt.plot([],[], color = 'r', marker = 'o')
 rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
 plt.gca().add_patch(rectangle) # gca = get current axis 
-plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=2) #draws a halfcourt line 
+plt.plot([47,47], [0, 50], color='k', linestyle='-', linewidth=1) #draws a halfcourt line 
 
 '''
 for item in ball:  
