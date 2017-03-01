@@ -115,16 +115,16 @@ line12, = plt.plot([],[], color = 'k', marker = 'o')
 line13, = plt.plot([],[], color = 'k', marker = 'o')
 rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
-rectangle1 = plt.Rectangle((0, 19), 19, 16, fill = False, 
+rectangle1 = plt.Rectangle((0, 17), 19, 16, fill = False, 
                           linestyle = '-') #free throw box
-rectangle2 = plt.Rectangle((75, 19), 19, 16, fill = False, 
+rectangle2 = plt.Rectangle((75, 17), 19, 16, fill = False, 
                           linestyle = '-') #free throw box
 circle = plt.Circle((47,25), radius = 6.0 , fill = False, linestyle = '-') #middle circle
 plt.gca().add_patch(rectangle) # gca = get current axis 
 plt.gca().add_patch(rectangle1)
 plt.gca().add_patch(rectangle2)
 plt.gca().add_patch(circle)
-plt.plot([47,47], [0,50], color='k', linestyle='-', linewidth=1) #draws a halfcourt line
+plt.plot([47,47], [0,50], color='k', linestyle='-', linewidth=1) #draws a halfcourt line 
 plt.plot([0,19], [19,19], color='k', linestyle='-', linewidth=1)
 plt.plot([0,19], [31,31], color='k', linestyle='-', linewidth=1)
 plt.plot([75,94], [19,19], color='k', linestyle='-', linewidth=1)
@@ -285,6 +285,3 @@ anim12 = animation.FuncAnimation(fig, animate12, R2_data, interval = 25, repeat 
 anim13 = animation.FuncAnimation(fig, animate13, R3_data, interval = 25, repeat = True)
 
 plt.show()
-
-
-
