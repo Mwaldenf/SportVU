@@ -293,6 +293,8 @@ def R3_data():
 def animate13(R3_data): 
     x, y = R3_data[0], R3_data[1]
     line13.set_data(x,y)
+    
+#puts the animated objects on the court
 anim = animation.FuncAnimation(fig, animate, ball_data, interval = 25, repeat = True)
 anim1 = animation.FuncAnimation(fig, animate1, T1P1_data, interval = 25, repeat = True)
 anim2 = animation.FuncAnimation(fig, animate2, T1P2_data, interval = 25, repeat = True)
