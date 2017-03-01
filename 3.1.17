@@ -99,7 +99,7 @@ plt.axes()
 fig = plt.figure()
 plt.xlim(-5,100)   #sets the axes so you can see the court
 plt.ylim(-5,60)
-line, = plt.plot([],[], color = 'r', marker = '0')
+line, = plt.plot([],[], color = 'r', marker = 'o')
 
 rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
