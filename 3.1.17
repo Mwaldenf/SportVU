@@ -111,18 +111,18 @@ for item in ball:
     plt.plot(item[0],item[1], "o") #prints a scatterplot of all the ball coordinates!!!!!!!
 '''
 
-def point_data():
+def ball_data():
     for frame in ball:
         x = frame[0]
         y = frame[1]
         yield x, y
 
-def animate(point_data):                           
-    x, y = point_data[0], point_data[1]        
+def animate(ball_data):                           
+    x, y = ball_data[0], ball_data[1]        
     line.set_data(x,y)
 
             
-anim = animation.FuncAnimation(fig, animate, point_data, interval = 25, repeat = True)
+anim = animation.FuncAnimation(fig, animate, ball_data, interval = 25, repeat = True)
 
 
 plt.show()
