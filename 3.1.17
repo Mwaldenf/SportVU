@@ -115,9 +115,9 @@ line12, = plt.plot([],[], color = 'k', marker = 'o')
 line13, = plt.plot([],[], color = 'k', marker = 'o')
 rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
-rectangle1 = plt.Rectangle((0, 19), 19, 12, fill = False, 
+rectangle1 = plt.Rectangle((0, 19), 19, 16, fill = False, 
                           linestyle = '-') #free throw box
-rectangle2 = plt.Rectangle((75, 19), 19, 12, fill = False, 
+rectangle2 = plt.Rectangle((75, 19), 19, 16, fill = False, 
                           linestyle = '-') #free throw box
 circle = plt.Circle((47,25), radius = 6.0 , fill = False, linestyle = '-') #middle circle
 plt.gca().add_patch(rectangle) # gca = get current axis 
