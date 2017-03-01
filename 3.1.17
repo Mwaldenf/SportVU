@@ -99,9 +99,17 @@ plt.axes()
 fig = plt.figure()
 plt.xlim(-5,100)   #sets the axes so you can see the court
 plt.ylim(-5,60)
-line, = plt.plot([],[], color = 'r', marker = 'o')
+line, = plt.plot([],[], color = 'k', marker = 'o')
 line1, = plt.plot([],[], color = 'b', marker = 'o')
-
+line2, = plt.plot([],[], color = 'b', marker = 'o')
+line3, = plt.plot([],[], color = 'b', marker = 'o')
+line4, = plt.plot([],[], color = 'b', marker = 'o')
+line5, = plt.plot([],[], color = 'b', marker = 'o')
+line6, = plt.plot([],[], color = 'r', marker = 'o')
+line7, = plt.plot([],[], color = 'r', marker = 'o')
+line8, = plt.plot([],[], color = 'r', marker = 'o')
+line9, = plt.plot([],[], color = 'r', marker = 'o')
+line10, = plt.plot([],[], color = 'r', marker = 'o')
 rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
                           linestyle = '-') #draws the court in the correct dimensions
 plt.gca().add_patch(rectangle) # gca = get current axis 
@@ -127,7 +135,105 @@ def animate1(T1P1_data):
     x, y = T1P1_data[0], T1P1_data[1]        
     line1.set_data(x,y)
             
+
+def T1P2_data():
+    for frame in T1P2:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate2(T1P2_data): 
+    x, y = T1P2_data[0], T1P2_data[1]
+    line2.set_data(x,y)
+    
+    
+def T1P3_data():
+    for frame in T1P3:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate3(T1P3_data): 
+    x, y = T1P3_data[0], T1P3_data[1]
+    line3.set_data(x,y)
+    
+
+def T1P4_data():
+    for frame in T1P4:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate4(T1P4_data): 
+    x, y = T1P4_data[0], T1P4_data[1]
+    line4.set_data(x,y)
+    
+    
+def T1P5_data():
+    for frame in T1P5:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate5(T1P5_data): 
+    x, y = T1P5_data[0], T1P5_data[1]
+    line5.set_data(x,y)
+        
+
+def T2P1_data():
+    for frame in T2P1:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate6(T2P1_data):                           
+    x, y = T2P1_data[0], T2P1_data[1]        
+    line6.set_data(x,y)
+            
+
+def T2P2_data():
+    for frame in T2P2:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate7(T2P2_data): 
+    x, y = T2P2_data[0], T2P2_data[1]
+    line7.set_data(x,y)
+    
+    
+def T2P3_data():
+    for frame in T2P3:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate8(T2P3_data): 
+    x, y = T2P3_data[0], T2P3_data[1]
+    line8.set_data(x,y)
+    
+
+def T2P4_data():
+    for frame in T2P4:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate9(T2P4_data): 
+    x, y = T2P4_data[0], T2P4_data[1]
+    line9.set_data(x,y)
+    
+    
+def T2P5_data():
+    for frame in T2P5:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate10(T2P5_data): 
+    x, y = T2P5_data[0], T2P5_data[1]
+    line10.set_data(x,y)
 anim = animation.FuncAnimation(fig, animate, ball_data, interval = 25, repeat = True)
 anim1 = animation.FuncAnimation(fig, animate1, T1P1_data, interval = 25, repeat = True)
+anim2 = animation.FuncAnimation(fig, animate2, T1P2_data, interval = 25, repeat = True)
+anim3 = animation.FuncAnimation(fig, animate3, T1P3_data, interval = 25, repeat = True)
+anim4 = animation.FuncAnimation(fig, animate4, T1P4_data, interval = 25, repeat = True)
+anim5 = animation.FuncAnimation(fig, animate5, T1P5_data, interval = 25, repeat = True)
+anim6 = animation.FuncAnimation(fig, animate6, T2P1_data, interval = 25, repeat = True)
+anim7 = animation.FuncAnimation(fig, animate7, T2P2_data, interval = 25, repeat = True)
+anim8 = animation.FuncAnimation(fig, animate8, T2P3_data, interval = 25, repeat = True)
+anim9 = animation.FuncAnimation(fig, animate9, T2P4_data, interval = 25, repeat = True)
+anim10 = animation.FuncAnimation(fig, animate10, T2P5_data, interval = 25, repeat = True)
 
 plt.show()
