@@ -2,6 +2,7 @@
 import xml.etree.ElementTree as ET
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import matplotlib.patches as patches
 
 tree = ET.parse("1MIN H1.XML")
 root = tree.getroot()
