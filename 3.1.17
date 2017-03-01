@@ -133,6 +133,9 @@ plt.plot([0,19], [19,19], color='k', linestyle='-', linewidth=1)
 plt.plot([0,19], [31,31], color='k', linestyle='-', linewidth=1)
 plt.plot([75,94], [19,19], color='k', linestyle='-', linewidth=1)
 plt.plot([75,94], [31,31], color='k', linestyle='-', linewidth=1)
+plt.plot([4,4], [22,28], color = 'k', linestyle='-', linewidth=1)
+plt.plot([90,90], [22,28], color = 'k', linestyle='-', linewidth=1)
+
 
 
 def ball_data():
