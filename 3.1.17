@@ -122,7 +122,7 @@ def animate(point_data):
     line.set_data(x,y)
 
             
-anim = animation.FuncAnimation(fig, animate, point_data, interval = 300, repeat = True)
+anim = animation.FuncAnimation(fig, animate, point_data, interval = 25, repeat = True)
 
 
 plt.show()
