@@ -96,8 +96,11 @@ for item in refs:
         elif item.index(y) == 2:
             R3.append(thg[2:4])
 
-#print(T1)
+count = {}
 for key in T1:
     for item in T1[key]:
         if item[0] >= 47:
-            print("Yay!")
+            count[key] += 1
+            
+print(count)
+
