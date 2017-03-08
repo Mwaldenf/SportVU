@@ -95,7 +95,7 @@ for item in refs:
             R2.append(thg[2:4])
         elif item.index(y) == 2:
             R3.append(thg[2:4])
-
+'''
 pDuke = 0
 pFlorida = 0
 
@@ -105,3 +105,23 @@ for aa, ab in zip(T1P1,T2P2):
             pDuke += 1
             
 print(pDuke)
+'''
+pDuke = 0
+pFlorida = 0
+count = 0
+
+#for aa, ab in zip(T1P1,T2P2):
+for aa,ab,ac,ad,ae in zip(T1P1,T1P2,T1P3,T1P4,T1P5):
+    if aa[0] >= 47 and ab[0] >= 47 and ac[0] >= 47 and ad[0] >= 47 and ae[0] >= 47:
+        count = 0
+        count += 1
+        if count == 1:
+            pFlorida += 1
+    if aa[0] <= 47 and ab[0] <= 47 and ac[0] <= 47 and ad[0] <= 47 and ae[0] <= 47:
+        count = 0
+        count += 1
+        if count == 1:
+            pDuke += 1
+        
+print("Possession Duke = ", pDuke)
+print("Possession Florida = ", pFlorida)
