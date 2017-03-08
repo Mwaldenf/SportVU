@@ -96,11 +96,12 @@ for item in refs:
         elif item.index(y) == 2:
             R3.append(thg[2:4])
 
-count = {}
-for key in T1:
-    for item in T1[key]:
-        if item[0] >= 47:
-            count[key] += 1
-            
-print(count)
+pDuke = 0
+pFlorida = 0
 
+for aa, ab in zip(T1P1,T2P2):
+    while aa[0] >= 47 and ab[0] >= 47:
+        if aa[0] <= 47 and ab[0] <= 47:
+            pDuke += 1
+            
+print(pDuke)
