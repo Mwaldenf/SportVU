@@ -102,7 +102,7 @@ for item in refs:
 #possessions
 pDuke = 0
 pFlorida = 0
-count = []
+count = [2]
 
 #for aa, ab in zip(T1P1,T2P2):
 for b,aa,ab,ac,ad,ae,ba,bb,bc,bd,be in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5):
@@ -116,9 +116,9 @@ poschange = 0
 for a,b in zip(count,count[1:]):
     if a != b:
         poschange += 1
-        if a == 0:
+        if b == 1:
             pDuke += 1
-        if a != 0:
+        if b != 1:
             pFlorida +=1
 
 print(poschange)
