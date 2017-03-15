@@ -125,3 +125,8 @@ print(poschange)
         
 print("Possession Duke = ", pDuke)
 print("Possession Florida = ", pFlorida)
+
+#THIS DOES NOT WORK BUT IT WAS AN IDEA 
+dist = []
+def distance(ball, player):
+    return math.sqrt((ball[0] - T1P1[0])**2 + (ball[1] - T1P1[1])**2)
