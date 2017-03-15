@@ -8,3 +8,133 @@ for a,b in zip(x,x[1:]):
     if a != b:
         count += 1
 print(count)
+
+
+#this counts possesions by each moment 
+import xml.etree.ElementTree as ET
+
+tree = ET.parse("1MIN H1.XML")
+root = tree.getroot()
+
+
+#This defines the variables outside of the for loop so it prints anywhere
+ball = []
+T1P1 = []
+T1P2 = []
+T1P3 = []
+T1P4 = []
+T1P5 = []
+T2P1 = []
+T2P2 = []
+T2P3 = []
+T2P4 = []
+T2P5 = []
+R1 = []
+R2 = []
+R3 = []
+team1 = []
+team2 = []
+refs = []
+bal = []
+
+times = []
+timeslst = []
+
+T1 = {}
+T2 = []
+
+for moment in root.iter("moment"):
+    locations = moment.get("locations")
+    places = locations.split(";")   #splits location data
+    if len(places) != 14: # if there arent 14 indexes in a place then it skips that moment 
+        del moment
+    else: #runs code as usual 
+        time0 = moment.get("time")
+        timeslst.append(int(time0)) #organizes times into a list 
+        bal.append(places[0])
+        team1.append(places[1:6])
+        team2.append(places[6:11]) 
+        refs.append(places[11:14])
+
+#takes list of points, isolates coordinates, and makes them floats
+for item in bal:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    ball.append(thg[2:4])
+
+#consolidates the team data so we don't have to go through 14 for statements
+for item in team1:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T1P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T1P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T1P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T1P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T1P5.append(thg[2:4])
+    T1["T1P1"] = T1P1
+#    T1.append(T1P2)
+#    T1.append(T1P3)
+#    T1.append(T1P4)
+#    T1.append(T1P5)           
+
+for item in team2:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T2P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T2P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T2P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T2P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T2P5.append(thg[2:4])
+            
+for item in refs:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            R1.append(thg[2:4])
+        elif item.index(y) == 1:
+            R2.append(thg[2:4])
+        elif item.index(y) == 2:
+            R3.append(thg[2:4])
+'''
+pDuke = 0
+pFlorida = 0
+
+for aa, ab in zip(T1P1,T2P2):
+    while aa[0] >= 47 and ab[0] >= 47:
+        if aa[0] <= 47 and ab[0] <= 47:
+            pDuke += 1
+            
+print(pDuke)
+'''
+pDuke = 0
+pFlorida = 0
+count = 0
+
+#for aa, ab in zip(T1P1,T2P2):
+for aa,ab,ac,ad,ae,ba,bb,bc,bd,be in zip(T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5):
+    if aa[0] >= 47 and ab[0] >= 47 and ac[0] >= 47 and ad[0] >= 47 and ae[0] >= 47 and ba[0] >= 47 and bb[0] >= 47 and bc[0] >= 47 and bd[0] >= 47 and be[0] >= 47:
+        count = 0
+        count += 1
+        if count == 1:
+            pDuke += 1
+    if aa[0] <= 47 and ab[0] <= 47 and ac[0] <= 47 and ad[0] <= 47 and ae[0] <= 47 and ba[0] <= 47 and bb[0] <= 47 and bc[0] <= 47 and bd[0] <= 47 and be[0] <= 47:
+        count = 0
+        count += 1
+        if count == 1:
+            pFlorida += 1
+        
+print("Possession Duke = ", pDuke)
+print("Possession Florida = ", pFlorida)
