@@ -1,15 +1,5 @@
 #3.15.17
 
-#detecting change in possession
-x = [1,1,1,0,0,1,1,1,0,0,1,1]
-count = 0
-
-for a,b in zip(x,x[1:]):
-    if a != b:
-        count += 1
-print(count)
-
-
 #this counts possesions by each moment 
 import xml.etree.ElementTree as ET
 
@@ -108,33 +98,30 @@ for item in refs:
             R2.append(thg[2:4])
         elif item.index(y) == 2:
             R3.append(thg[2:4])
-'''
-pDuke = 0
-pFlorida = 0
 
-for aa, ab in zip(T1P1,T2P2):
-    while aa[0] >= 47 and ab[0] >= 47:
-        if aa[0] <= 47 and ab[0] <= 47:
-            pDuke += 1
-            
-print(pDuke)
-'''
+#possessions
 pDuke = 0
 pFlorida = 0
-count = 0
+count = []
 
 #for aa, ab in zip(T1P1,T2P2):
 for b,aa,ab,ac,ad,ae,ba,bb,bc,bd,be in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5):
     if b[0] >= 47 and aa[0] >= 47 and ab[0] >= 47 and ac[0] >= 47 and ad[0] >= 47 and ae[0] >= 47 and ba[0] >= 47 and bb[0] >= 47 and bc[0] >= 47 and bd[0] >= 47 and be[0] >= 47:
-        count = 0
-        count += 1
-        if count == 1:
-            pDuke += 1
+        count.append(1)
     if b[0] <= 47 and aa[0] <= 47 and ab[0] <= 47 and ac[0] <= 47 and ad[0] <= 47 and ae[0] <= 47 and ba[0] <= 47 and bb[0] <= 47 and bc[0] <= 47 and bd[0] <= 47 and be[0] <= 47:
-        count = 0
-        count += 1
-        if count == 1:
-            pFlorida += 1
+        count.append(0)
+
+poschange = 0
+
+for a,b in zip(count,count[1:]):
+    if a != b:
+        poschange += 1
+        if a == 0:
+            pDuke += 1
+        if a != 0:
+            pFlorida +=1
+
+print(poschange)
         
 print("Possession Duke = ", pDuke)
 print("Possession Florida = ", pFlorida)
