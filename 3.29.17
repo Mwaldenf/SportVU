@@ -93,4 +93,25 @@ dist = []
 def distance(ball, player):
     return math.sqrt((ball[0] - T1P1[0])**2 + (ball[1] - T1P1[1])**2)
  
+ 
+ # OKAY THIS THING WORKS BUT RIGHT NOW IT ONLY GIVE DISTANCE OF BALL AND 1 OBJECT
+ import math
+
+ball = [75,3]
+T1P1 = [72,5]
+T1P2 = [77,7]
+T1P3 = [74,8]
+T1P4 = [75,4]
+T1P5 = [78,1]
+T2P1 = [79,0]
+T2P2 = [71,9]
+T2P3 = [72,2]
+T2P4 = [70,4]
+T2P5 = [73,2]
+dis = []
+
+dist = []
+def distance(ball, player):
+    return math.sqrt((ball[0] - player[0])**2 + (ball[1] - player[1])**2)
+print(distance(ball, T1P1)) 
 
