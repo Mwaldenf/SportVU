@@ -172,7 +172,9 @@ for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5 in zip(ball,T1P1,T1P2,T1P3,T1P
         player.append(["T2P5",x])
 print(player)
 
-for x,y in zip(player,player[1:]):
-    if x[0] != y[0]:
-        passes += 1
+for x,y,z in zip(player,player[1:],player[75:]):   
+    if x[0] != y[0]:       #checks if there's a change in possession
+        if y[0] == z[0]:   #checks if the second person has possession for more than 3 seconds 
+            passes += 1
+print(passes)
 print(passes)
