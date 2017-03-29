@@ -171,3 +171,8 @@ for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5 in zip(ball,T1P1,T1P2,T1P3,T1P
     elif x == distance(balll, BP5):
         player.append(["T2P5",x])
 print(player)
+
+for x,y in zip(player,player[1:]):
+    if x[0] != y[0]:
+        passes += 1
+print(passes)
