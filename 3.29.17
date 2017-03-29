@@ -26,6 +26,9 @@ bal = []
 norefs = [ball, T1P1, T1P2, T1P3, T1P4, T1P5, T2P1, T2P2, T2P3, T2P4, T2P5]
 times = []
 timeslst = []
+gameclock = []
+
+
 #for moment in root.iter("moment"):
     #locations = moment.get("locations")
 places = locations.split(";")   #splits location data
@@ -34,6 +37,8 @@ if len(places) != 14: # if there arent 14 indexes in a place then it skips that 
 else: #runs code as usual 
     #time0 = moment.get("time")
     #timeslst.append(int(time0)) #organizes times into a list 
+    clock = moment.get("game-clock")
+    gameclock.append(float(clock))
     bal.append(places[0])
     team1.append(places[1:6])
     team2.append(places[6:11]) 
@@ -147,42 +152,43 @@ def distance(ball, player):
 
 player = []
 
-for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5,timeslst):
+for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5,timeslst,gameclock):
     dist = [distance(balll, AP1),distance(balll, AP2),distance(balll, AP3),distance(balll, AP4),distance(balll, AP5),distance(balll, BP1),distance(balll, BP2),distance(balll, BP3),distance(balll, BP4),distance(balll, BP5)]
     x = min(dist)
     if x == distance(balll, AP1):
-        player.append([1,"T1P1",x,t])
+        player.append([1,"T1P1",x,t,g])
     elif x == distance(balll, AP2):
-        player.append([1,"T1P2",x,t])
+        player.append([1,"T1P2",x,t,g])
     elif x == distance(balll, AP3):
-        player.append([1,"T1P3",x,t])
+        player.append([1,"T1P3",x,t,g])
     elif x == distance(balll, AP4):
-        player.append([1,"T1P4",x,t])
+        player.append([1,"T1P4",x,t,g])
     elif x == distance(balll, AP5):
-        player.append([1,"T1P5",x,t])
+        player.append([1,"T1P5",x,t,g])
     elif x == distance(balll, BP1):
-        player.append([2,"T2P1",x,t])
+        player.append([2,"T2P1",x,t,g])
     elif x == distance(balll, BP2):
-        player.append([2,"T2P2",x,t])
+        player.append([2,"T2P2",x,t,g])
     elif x == distance(balll, BP3):
-        player.append([2,"T2P3",x,t])
+        player.append([2,"T2P3",x,t,g])
     elif x == distance(balll, BP4):
-        player.append([2,"T2P4",x,t])
+        player.append([2,"T2P4",x,t,g])
     elif x == distance(balll, BP5):
-        player.append([2,"T2P5",x,t])
+        player.append([2,"T2P5",x,t,g])
         
 
 for x,y,z in zip(player,player[1:],player[25:]):
-    if x[1] != y[1]:       #checks if there's a change in possession
-        if y[1] == z[1]:   #checks if the second person has possession for more than 1 second 
-            if x[0] == 1 and y[0] == 1:   #checks if the pass was made between teamates of the same team
-                passesD += 1
-                passes += 1
-                print(x,y)
-            elif x[0] == 2 and y[0] == 2:
-                passesF += 1
-                passes += 1
-                print(x,y)
+    if x[4] < 1200 and x[2] < 10:
+        if x[1] != y[1]:
+            if y[1] == z[1]:
+                if x[0] == 1 and y[0] == 1:
+                    passesD += 1
+                    passes += 1
+                    print(x,y)
+                elif x[0] == 2 and y[0] == 2:
+                    passesF += 1
+                    passes += 1
+                    print(x,y)
 
 
 print(passes)
