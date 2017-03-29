@@ -139,3 +139,36 @@ for balll,a,b,c in zip(ball,P1,P2,P3):
     elif x == distance(balll, c):
         player.append(("P3",x))
 print(player)
+
+
+
+#Applies the above example to the basketball data, doesn't work yet
+def distance(ball, player):
+    return math.sqrt((ball[0] - player[0])**2 + (ball[1] - player[1])**2)
+
+player = []
+
+for balll,1P1,1P2,1P3,1P4,1P5,2P1,2P2,2P3,2P4,2P5 in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5):
+    dist = [distance(balll, 1P1),distance(balll, 1P2),distance(balll, 1P3),distance(balll, 1P4),distance(balll, 1P5),distance(balll, 2P1),distance(balll, 2P2),distance(balll, 2P3),distance(balll, 2P4),distance(balll, 2P5)]
+    x = min(dist)
+    if x == distance(balll, 1P1):
+        player.append(("T1P1",x))
+    elif x == distance(balll, 1P2):
+        player.append(("T1P2",x))
+    elif x == distance(balll, 1P3):
+        player.append(("T1P3",x))
+    elif x == distance(balll, 1P4):
+        player.append(("T1P4",x))
+    elif x == distance(balll, 1P5):
+        player.append(("T1P5",x))
+    elif x == distance(balll, 2P1):
+        player.append(("T2P1",x))
+    elif x == distance(balll, 2P2):
+        player.append(("T2P2",x))
+    elif x == distance(balll, 2P3):
+        player.append(("T2P3",x))
+    elif x == distance(balll, 2P4):
+        player.append(("T2P4",x))
+    elif x == distance(balll, 2P5):
+        player.append(("T2P5",x))
+print(player)
