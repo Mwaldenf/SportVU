@@ -176,5 +176,6 @@ for x,y,z in zip(player,player[1:],player[75:]):
     if x[0] != y[0]:       #checks if there's a change in possession
         if y[0] == z[0]:   #checks if the second person has possession for more than 3 seconds 
             passes += 1
-print(passes)
+            print(x,y)
+
 print(passes)
