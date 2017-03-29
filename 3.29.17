@@ -133,9 +133,9 @@ for balll,a,b,c in zip(ball,P1,P2,P3):
     dist = [distance(balll, a),distance(balll, b),distance(balll, c)]
     x = min(dist)
     if x == distance(balll, a):
-        player.append("P1")
+        player.append(("P1",x))
     elif x == distance(balll, b):
-        player.append("P2")
+        player.append(("P2",x))
     elif x == distance(balll, c):
-        player.append("P3")
+        player.append(("P3",x))
 print(player)
