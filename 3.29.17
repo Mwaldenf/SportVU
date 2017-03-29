@@ -151,6 +151,9 @@ def distance(ball, player):
     return math.sqrt((ball[0] - player[0])**2 + (ball[1] - player[1])**2)
 
 player = []
+passes = 0
+passesD = 0
+passesF = 0
 
 for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5,timeslst,gameclock):
     dist = [distance(balll, AP1),distance(balll, AP2),distance(balll, AP3),distance(balll, AP4),distance(balll, AP5),distance(balll, BP1),distance(balll, BP2),distance(balll, BP3),distance(balll, BP4),distance(balll, BP5)]
