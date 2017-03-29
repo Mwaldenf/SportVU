@@ -151,31 +151,38 @@ for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t in zip(ball,T1P1,T1P2,T1P3,T
     dist = [distance(balll, AP1),distance(balll, AP2),distance(balll, AP3),distance(balll, AP4),distance(balll, AP5),distance(balll, BP1),distance(balll, BP2),distance(balll, BP3),distance(balll, BP4),distance(balll, BP5)]
     x = min(dist)
     if x == distance(balll, AP1):
-        player.append(["T1P1",x,t])
+        player.append([1,"T1P1",x,t])
     elif x == distance(balll, AP2):
-        player.append(["T1P2",x,t])
+        player.append([1,"T1P2",x,t])
     elif x == distance(balll, AP3):
-        player.append(["T1P3",x,t])
+        player.append([1,"T1P3",x,t])
     elif x == distance(balll, AP4):
-        player.append(["T1P4",x,t])
+        player.append([1,"T1P4",x,t])
     elif x == distance(balll, AP5):
-        player.append(["T1P5",x,t])
+        player.append([1,"T1P5",x,t])
     elif x == distance(balll, BP1):
-        player.append(["T2P1",x,t])
+        player.append([2,"T2P1",x,t])
     elif x == distance(balll, BP2):
-        player.append(["T2P2",x,t])
+        player.append([2,"T2P2",x,t])
     elif x == distance(balll, BP3):
-        player.append(["T2P3",x,t])
+        player.append([2,"T2P3",x,t])
     elif x == distance(balll, BP4):
-        player.append(["T2P4",x,t])
+        player.append([2,"T2P4",x,t])
     elif x == distance(balll, BP5):
-        player.append(["T2P5",x,t])
-print(player)
+        player.append([2,"T2P5",x,t])
+        
 
-for x,y,z in zip(player,player[1:],player[75:]):   
-    if x[0] != y[0]:       #checks if there's a change in possession
-        if y[0] == z[0]:   #checks if the second person has possession for more than 3 seconds 
-            passes += 1
-            print(x,y)
+for x,y,z in zip(player,player[1:],player[30:]):
+    if x[1] != y[1]:       #checks if there's a change in possession
+        if y[1] == z[1]:   #checks if the second person has possession for more than 1.2 seconds 
+            if x[0] == 1 and y[0] == 1:   #checks if the pass was made between teamates of the same team
+                passesD += 1
+                passes += 1
+                print(x,y)
+            elif x[0] == 2 and y[0] == 2:
+                passesF += 1
+                passes += 1
+                print(x,y)
+
 
 print(passes)
