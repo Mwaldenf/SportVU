@@ -151,24 +151,24 @@ player = []
 for balll,aPa,aPb,aPc,aPd,aPe,bPa,bPb,bPc,bPd,bPe in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5):
     dist = [distance(balll, aPa),distance(balll, aPb),distance(balll, aPc),distance(balll, aPd),distance(balll, aPe),distance(balll, bPa),distance(balll, bPb),distance(balll, bPc),distance(balll, bPd),distance(balll, bPe)]
     x = min(dist)
-    if x == distance(balll, aPa):
-        player.append(("T1P1",x))
-    elif x == distance(balll, aPb):
-        player.append(("T1P2",x))
-    elif x == distance(balll, aPc):
-        player.append(("T1P3",x))
-    elif x == distance(balll, aPd):
-        player.append(("T1P4",x))
-    elif x == distance(balll, aPe):
-        player.append(("T1P5",x))
-    elif x == distance(balll, bPa):
-        player.append(("T2P1",x))
-    elif x == distance(balll, bPb):
-        player.append(("T2P2",x))
-    elif x == distance(balll, bPc):
-        player.append(("T2P3",x))
-    elif x == distance(balll, bPd):
-        player.append(("T2P4",x))
-    elif x == distance(balll, bPe):
-        player.append(("T2P5",x))
+   if x == distance(balll, AP1):
+        player.append(["T1P1",x])
+    elif x == distance(balll, AP2):
+        player.append(["T1P2",x])
+    elif x == distance(balll, AP3):
+        player.append(["T1P3",x])
+    elif x == distance(balll, AP4):
+        player.append(["T1P4",x])
+    elif x == distance(balll, AP5):
+        player.append(["T1P5",x])
+    elif x == distance(balll, BP1):
+        player.append(["T2P1",x])
+    elif x == distance(balll, BP2):
+        player.append(["T2P2",x])
+    elif x == distance(balll, BP3):
+        player.append(["T2P3",x])
+    elif x == distance(balll, BP4):
+        player.append(["T2P4",x])
+    elif x == distance(balll, BP5):
+        player.append(["T2P5",x])
 print(player)
