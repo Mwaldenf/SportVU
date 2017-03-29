@@ -140,18 +140,17 @@ for balll,a,b,c in zip(ball,P1,P2,P3):
         player.append(("P3",x))
 print(player)
 
+#this works 
 
-
-#Applies the above example to the basketball data, doesn't work yet
 def distance(ball, player):
     return math.sqrt((ball[0] - player[0])**2 + (ball[1] - player[1])**2)
 
 player = []
 
-for balll,aPa,aPb,aPc,aPd,aPe,bPa,bPb,bPc,bPd,bPe in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5):
-    dist = [distance(balll, aPa),distance(balll, aPb),distance(balll, aPc),distance(balll, aPd),distance(balll, aPe),distance(balll, bPa),distance(balll, bPb),distance(balll, bPc),distance(balll, bPd),distance(balll, bPe)]
+for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5 in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5):
+    dist = [distance(balll, AP1),distance(balll, AP2),distance(balll, AP3),distance(balll, AP4),distance(balll, AP5),distance(balll, BP1),distance(balll, BP2),distance(balll, BP3),distance(balll, BP4),distance(balll, BP5)]
     x = min(dist)
-   if x == distance(balll, AP1):
+    if x == distance(balll, AP1):
         player.append(["T1P1",x])
     elif x == distance(balll, AP2):
         player.append(["T1P2",x])
