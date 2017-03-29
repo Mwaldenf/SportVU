@@ -115,3 +115,27 @@ def distance(ball, player):
     return math.sqrt((ball[0] - player[0])**2 + (ball[1] - player[1])**2)
 print(distance(ball, T1P1)) 
 
+
+#gives a list of the player closest to the ball
+import math
+
+ball = [[3,4], [4,5]]
+P1 = [[5,6], [8,7]]
+P2 = [[4,3], [3,5]]
+P3 = [[6,8], [8,10]]
+
+def distance(ball, player):
+    return math.sqrt((ball[0] - player[0])**2 + (ball[1] - player[1])**2)
+
+player = []
+
+for balll,a,b,c in zip(ball,P1,P2,P3):
+    dist = [distance(balll, a),distance(balll, b),distance(balll, c)]
+    x = min(dist)
+    if x == distance(balll, a):
+        player.append("P1")
+    elif x == distance(balll, b):
+        player.append("P2")
+    elif x == distance(balll, c):
+        player.append("P3")
+print(player)
