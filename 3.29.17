@@ -5,6 +5,7 @@ import xml.etree.ElementTree as ET
 tree = ET.parse("5MIN H1.XML")
 root = tree.getroot()
 
+
 #This defines the variables outside of the for loop so it prints anywhere
 ball = []
 T1P1 = []
@@ -48,7 +49,7 @@ for moment in root.iter("moment"):
 for item in bal:
     coord = item.split(",")
     thg = [float(x) for x in coord]
-    ball.append(thg[2:4])
+    ball.append(thg[2:5])
 
 #consolidates the team data so we don't have to go through 14 for statements
 for item in team1:
@@ -106,39 +107,39 @@ for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3
     dist = [distance(balll, AP1),distance(balll, AP2),distance(balll, AP3),distance(balll, AP4),distance(balll, AP5),distance(balll, BP1),distance(balll, BP2),distance(balll, BP3),distance(balll, BP4),distance(balll, BP5)]
     x = min(dist)
     if x == distance(balll, AP1):
-        player.append([1,"T1P1",x,t,g])
+        player.append([1,"T1P1",x,t,g,balll[2]])
     elif x == distance(balll, AP2):
-        player.append([1,"T1P2",x,t,g])
+        player.append([1,"T1P2",x,t,g,balll[2]])
     elif x == distance(balll, AP3):
-        player.append([1,"T1P3",x,t,g])
+        player.append([1,"T1P3",x,t,g,balll[2]])
     elif x == distance(balll, AP4):
-        player.append([1,"T1P4",x,t,g])
+        player.append([1,"T1P4",x,t,g,balll[2]])
     elif x == distance(balll, AP5):
-        player.append([1,"T1P5",x,t,g])
+        player.append([1,"T1P5",x,t,g,balll[2]])
     elif x == distance(balll, BP1):
-        player.append([2,"T2P1",x,t,g])
+        player.append([2,"T2P1",x,t,g,balll[2]])
     elif x == distance(balll, BP2):
-        player.append([2,"T2P2",x,t,g])
+        player.append([2,"T2P2",x,t,g,balll[2]])
     elif x == distance(balll, BP3):
-        player.append([2,"T2P3",x,t,g])
+        player.append([2,"T2P3",x,t,g,balll[2]])
     elif x == distance(balll, BP4):
-        player.append([2,"T2P4",x,t,g])
+        player.append([2,"T2P4",x,t,g,balll[2]])
     elif x == distance(balll, BP5):
-        player.append([2,"T2P5",x,t,g])
+        player.append([2,"T2P5",x,t,g,balll[2]])
         
 
-for x,y,z in zip(player,player[1:],player[25:]):
-    if x[4] < 1200 and x[2] < 10:
+for x,y,z in zip(player,player[1:],player[15:]):
+    if x[4] < 1200 and x[2] < 10 and x[5] < 11.5:
         if x[1] != y[1]:
             if y[1] == z[1]:
                 if x[0] == 1 and y[0] == 1:
                     passesD += 1
                     passes += 1
-                    #print(x,y)
+                    print(x,y)
                 elif x[0] == 2 and y[0] == 2:
                     passesF += 1
                     passes += 1
-                    #print(x,y)
+                    print(x,y)
 
 print(passes)
 print("Duke = ", passesD)
