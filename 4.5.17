@@ -18,4 +18,48 @@ for a,b in zip(count,count[1:]):
             pLeft += 1
             possession["Left %s" % pLeft] = b[1]
 
-print(possession)
+#print(possession)
+
+for moment in root.iter("moment"):
+    locations = moment.get("locations")
+    places = locations.split(";")   #splits location data
+    if len(places) != 14: # if there arent 14 indexes in a place then it skips that moment 
+        del moment
+    else: #runs code as usual 
+        time = moment.get("time")
+        timeslst.append(int(time)) #organizes times into a list 
+        
+DukePos = {}
+FAPos = {}
+
+#possessions
+pDuke = 0
+pFlorida = 0
+count = [2]
+ziplist = zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5,timeslst,gameclock)
+#for aa, ab in zip(T1P1,T2P2):
+for b,aa,ab,ac,ad,ae,ba,bb,bc,bd,be,tl,gc in ziplist:
+    if b[0] >= 47 and aa[0] >= 47 and ab[0] >= 47 and ac[0] >= 47 and ad[0] >= 47 and ae[0] >= 47 and ba[0] >= 47 and bb[0] >= 47 and bc[0] >= 47 and bd[0] >= 47 and be[0] >= 47:
+        count.append(1)
+    if b[0] <= 47 and aa[0] <= 47 and ab[0] <= 47 and ac[0] <= 47 and ad[0] <= 47 and ae[0] <= 47 and ba[0] <= 47 and bb[0] <= 47 and bc[0] <= 47 and bd[0] <= 47 and be[0] <= 47:
+        count.append(0)
+
+posnumD = 0
+posnumFA = 0
+
+poschange = 0
+
+
+for a,b,t in zip(count,count[1:], timeslst):
+    if a != b:
+        poschange += 1
+        if b == 1:
+            pDuke += 1
+            DukePos['possession %s' % posnumD] = t
+            posnumD += 1
+        if b != 1:
+            pFlorida += 1
+            FAPos['possession %s' % posnumFA] = t
+            posnumFA += 1
+print(DukePos)
+print(FAPos)
