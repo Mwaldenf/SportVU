@@ -136,6 +136,7 @@ poschange = 0
 for a,b,t in zip(count,count[1:], timeslst):
     if a != b:
         poschange += 1
+        et = timeslst[timeslst.index(st)-1]
         if b == 1:
             pDuke += 1
             DukePos['possession %s' % posnumD] = t
