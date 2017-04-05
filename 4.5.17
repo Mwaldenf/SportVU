@@ -1,4 +1,10 @@
 #4.5.17
+import math
+import xml.etree.ElementTree as ET
+
+tree = ET.parse("5MIN H1.XML")
+root = tree.getroot()
+
 #example to create a dictionary of the start times for possessions
 poschange = 0
 pRight = 0
