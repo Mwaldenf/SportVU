@@ -19,7 +19,7 @@ for a,b in zip(count,count[1:]):
         poschange += 1
         if b[0] == 1:
             pRight += 1
-            possession["Right %s" % pRight] = 0
+            possession["Right %s" % pRight] = b[1]
         if b[0] == 0:
             pLeft += 1
             possession["Left %s" % pLeft] = b[1]
