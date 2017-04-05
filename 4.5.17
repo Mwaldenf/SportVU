@@ -127,8 +127,8 @@ for b,aa,ab,ac,ad,ae,ba,bb,bc,bd,be,tl,gc in ziplist:
     if b[0] <= 47 and aa[0] <= 47 and ab[0] <= 47 and ac[0] <= 47 and ad[0] <= 47 and ae[0] <= 47 and ba[0] <= 47 and bb[0] <= 47 and bc[0] <= 47 and bd[0] <= 47 and be[0] <= 47:
         count.append(0)
 
-posnumD = 0
-posnumFA = 0
+posnumD = 1
+posnumFA = 1
 
 poschange = 0
 
