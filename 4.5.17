@@ -135,7 +135,7 @@ posnumFA = 1
 poschange = 0
 
 
-for a,b,t in zip(count,count[1:], timeslst):
+for a,b,st in zip(count,count[1:], timeslst):
     if a != b:
         poschange += 1
         et = timeslst[timeslst.index(st)-1]
