@@ -114,11 +114,14 @@ for item in refs:
         
 DukePos = {}
 FAPos = {}
+np = {}
 
 #possessions
 pDuke = 0
 pFlorida = 0
+nopos = 0
 count = [2]
+
 ziplist = zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5,timeslst,gameclock)
 #for aa, ab in zip(T1P1,T2P2):
 for b,aa,ab,ac,ad,ae,ba,bb,bc,bd,be,tl,gc in ziplist:
@@ -131,6 +134,7 @@ for b,aa,ab,ac,ad,ae,ba,bb,bc,bd,be,tl,gc in ziplist:
 
 posnumD = 1
 posnumFA = 1
+npn = 1 
 
 poschange = 0
 
@@ -147,5 +151,10 @@ for a,b,st in zip(count,count[1:], timeslst):
             pFlorida += 1
             FAPos['possession %s' % posnumFA] = t
             posnumFA += 1
+        elif b == 2:
+            nopos =+ 1 
+            np["nopossession %s" % npn] = t 
+            npn += 1
 print(DukePos)
 print(FAPos)
+print(np)
