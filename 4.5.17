@@ -1,1 +1,21 @@
 #4.5.17
+#example to create a dictionary of the start times for possessions
+poschange = 0
+pRight = 0
+pLeft = 0
+possession = {}
+pos = 1
+
+count = [[2,2],[1,1],[1,2],[1,3],[1,4],[1,5],[0,6],[0,7],[0,8],[0,9],[1,10],[1,11],[1,12],[0,13],[0,14],[0,15]]
+
+for a,b in zip(count,count[1:]):
+    if a[0] != b[0]:
+        poschange += 1
+        if b[0] == 1:
+            pRight += 1
+            possession["Right %s" % pRight] = 0
+        if b[0] == 0:
+            pLeft += 1
+            possession["Left %s" % pLeft] = b[1]
+
+print(possession)
