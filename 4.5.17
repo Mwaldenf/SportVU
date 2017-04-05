@@ -26,6 +26,29 @@ for a,b in zip(count,count[1:]):
 
 #print(possession)
 
+ball = []
+T1P1 = []
+T1P2 = []
+T1P3 = []
+T1P4 = []
+T1P5 = []
+T2P1 = []
+T2P2 = []
+T2P3 = []
+T2P4 = []
+T2P5 = []
+R1 = []
+R2 = []
+R3 = []
+team1 = []
+team2 = []
+refs = []
+bal = []
+
+times = []
+timeslst = []
+gameclock = []
+
 for moment in root.iter("moment"):
     locations = moment.get("locations")
     places = locations.split(";")   #splits location data
@@ -34,6 +57,60 @@ for moment in root.iter("moment"):
     else: #runs code as usual 
         time = moment.get("time")
         timeslst.append(int(time)) #organizes times into a list 
+        clock = moment.get("game-clock")
+        gameclock.append(float(clock))
+        bal.append(places[0])
+        team1.append(places[1:6])
+        team2.append(places[6:11]) 
+        refs.append(places[11:14])
+
+#takes list of points, isolates coordinates, and makes them floats
+for item in bal:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    ball.append(thg[2:5])
+
+#consolidates the team data so we don't have to go through 14 for statements
+for item in team1:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T1P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T1P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T1P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T1P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T1P5.append(thg[2:4])          
+
+for item in team2:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T2P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T2P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T2P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T2P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T2P5.append(thg[2:4])
+            
+for item in refs:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            R1.append(thg[2:4])
+        elif item.index(y) == 1:
+            R2.append(thg[2:4])
+        elif item.index(y) == 2:
+            R3.append(thg[2:4]) 
         
 DukePos = {}
 FAPos = {}
