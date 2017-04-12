@@ -140,25 +140,25 @@ for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3
         dist = [distance(balll, AP1),distance(balll, AP2),distance(balll, AP3),distance(balll, AP4),distance(balll, AP5),distance(balll, BP1),distance(balll, BP2),distance(balll, BP3),distance(balll, BP4),distance(balll, BP5)]
         x = min(dist)
         if x == distance(balll, AP1):
-            player.append([1,"T1P1",x,t,g,balll[2]])
+            player.append([1,"T1P1",x,t,g,balll[2],AP1])
         elif x == distance(balll, AP2):
-            player.append([1,"T1P2",x,t,g,balll[2]])
+            player.append([1,"T1P2",x,t,g,balll[2],AP2])
         elif x == distance(balll, AP3):
-            player.append([1,"T1P3",x,t,g,balll[2]])
+            player.append([1,"T1P3",x,t,g,balll[2],AP3])
         elif x == distance(balll, AP4):
-            player.append([1,"T1P4",x,t,g,balll[2]])
+            player.append([1,"T1P4",x,t,g,balll[2],AP4])
         elif x == distance(balll, AP5):
-            player.append([1,"T1P5",x,t,g,balll[2]])
+            player.append([1,"T1P5",x,t,g,balll[2],AP5])
         elif x == distance(balll, BP1):
-            player.append([2,"T2P1",x,t,g,balll[2]])
+            player.append([2,"T2P1",x,t,g,balll[2],BP1])
         elif x == distance(balll, BP2):
-            player.append([2,"T2P2",x,t,g,balll[2]])
+            player.append([2,"T2P2",x,t,g,balll[2],BP2])
         elif x == distance(balll, BP3):
-            player.append([2,"T2P3",x,t,g,balll[2]])
+            player.append([2,"T2P3",x,t,g,balll[2],BP3])
         elif x == distance(balll, BP4):
-            player.append([2,"T2P4",x,t,g,balll[2]])
+            player.append([2,"T2P4",x,t,g,balll[2],BP4])
         elif x == distance(balll, BP5):
-            player.append([2,"T2P5",x,t,g,balll[2]])
+            player.append([2,"T2P5",x,t,g,balll[2],BP5])
         
 
 passperpos = []
