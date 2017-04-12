@@ -204,3 +204,11 @@ print(passes)
 print("Duke = ", passesR)
 print("Florida = ", passesL)
 print(passperpos)
+
+
+#Just an idea on how to calculate Speed of the pass
+#distance = raw_input("Enter the distance (meters, feet, miles, or light years):  ")
+#time = raw_input("Enter the time (seconds, hours, or years):  ")
+#rate = raw_input("Enter the rate):  ")
+
+#distancee = rate * time
