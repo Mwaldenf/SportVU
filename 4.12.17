@@ -167,7 +167,7 @@ passperpos = []
 for a in possession:
     pss = 0 #for possession characteristics, can add other things
     pos = []
-    for x,y,z,w,v in zip(player,player[1:],player[20:],player[3:],player[4:]):
+    for x,y,z,w,v in zip(player,player[1:],player[16:],player[3:],player[4:]):
         if x[4] <= a[3][0] and x[4] >= a[3][1]: #takes coordinates from within a possession only from the team with possession
             if x[4] < 1200 and x[2] < 10 and x[5] < 11: #points after game started, determines dist from player when possession changes, dtermines ball height
                 if x[1] != y[1]:
