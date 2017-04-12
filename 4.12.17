@@ -251,6 +251,7 @@ ax2.legend(graph1[0], 'Florida Atlantic')
 #print(passes)
 #print(player)
 
+plt.show()
 print(passes)
 print("Duke = ", passesR)
 print("Florida = ", passesL)
