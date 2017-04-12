@@ -182,6 +182,18 @@ for a in possession:
                             passes += 1
                             pss += 1
                             #print(x,y)
+                                if w[1] != v[1]:
+                 if x[2] <= 1.5 and z[2] <= 2 and x[0] == z[0]:
+                        if x[0] == 1 and a[1][0] == 'R':
+                            passesR += 1
+                            passes += 1
+                            pss += 1
+                            #print(x,y)
+                        elif x[0] == 2 and a[1][0] == 'L':
+                            passesL += 1
+                            passes += 1
+                            pss += 1
+                            #print(x,y)
     passperpos.append([a[1],pss]) #has  number of passes in each possession, chould check numbers
 
 #print(possession)
