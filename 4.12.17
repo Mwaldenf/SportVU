@@ -163,6 +163,9 @@ for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3
             player.append([2,"T2P5",x,t,g,balll[2],BP5])
         
 
+startp = [] #stores the start coordinated of a pass
+endp = [] #stores the end coordinateds of a pass
+passdist = [] #stores the distance traveled in a pass             
 passperpos = []
 #when to put exlude passes if not within team with posssession
 #exlude all other passes??
@@ -179,23 +182,32 @@ for a in possession:
                             passes += 1
                             pss += 1
                             #print(x,y)
+                            startp.append(x[6]) #appends start coordinates to startp
+                            endp.append(z[6]) #appends end coordinates to endp
                         elif x[0] == 2 and a[1][0] == 'L':
                             passesL += 1
                             passes += 1
                             pss += 1
-                            #print(x,y)                        
-                elif w[1] != v[1] and w[0] != v[0] and x[1] != z[1]:
+                            #print(x,y)    
+                            startp.append(x[6]) #appends start coordinates to startp
+                            endp.append(z[6]) #appends end coordinates to endp
+                elif w[1] != v[1] and w[0] != v[0]:
                     if x[2] <= 1.5 and z[2] <= 2 and x[0] == z[0]:
                         if x[0] == 1 and a[1][0] == 'R':
                             passesR += 1
                             passes += 1
                             pss += 1
                             #print(x,y)
+                            startp.append(x[6]) #appends start coordinates to startp
+                            endp.append(z[6]) #appends end coordinates to endp
                         elif x[0] == 2 and a[1][0] == 'L':
                             passesL += 1
                             passes += 1
                             pss += 1
                             #print(x,y)
+                            startp.append(x[6]) #appends start coordinates to startp
+                            endp.append(z[6]) #appends end coordinates to endp
+                    '''
                     elif x[0] == z[0] and w[1] == x[1] == y[1] and x[2] <= 3 and z[2] <= 2.5:
                         if x[0] == 1 and a[1][0] == 'R':
                             passesR += 1
@@ -207,7 +219,16 @@ for a in possession:
                             passes += 1
                             pss += 1
                             #print(x,y)
+                            '''
     passperpos.append([a[1],pss]) #has  number of passes in each possession, chould check numbers
+    
+def distancese(startp,endp):
+    return math.sqrt ((endp[0] - startp[0]) **2 + (endp[1] - startp[1]) **2)
+    
+for s,e in zip(startp,endp): #zips the start and end coordianates together
+    passdist.append(distancese(s,e)) #appends the distance of a pass to passdist
+    
+print(passdist)
 
 #graphing pilot plant
 #second one commented out because the labels don't properly work
