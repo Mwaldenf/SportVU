@@ -1,6 +1,8 @@
 #4.12.17
 import xml.etree.ElementTree as ET
 import math
+import matplotlib.pyplot as plt
+import numpy as np
 
 tree = ET.parse("5MIN H1.XML")
 root = tree.getroot()
@@ -195,6 +197,55 @@ for a in possession:
                             pss += 1
                             #print(x,y)
     passperpos.append([a[1],pss]) #has  number of passes in each possession, chould check numbers
+
+#graphing pilot plant
+#second one commented out because the labels don't properly work
+Dppp = []
+FAppp = []
+numposD = []
+numposFA = []
+
+for p in passperpos:
+    if p[0] == ['R', 1]:
+        Dppp.append(p[1])
+    elif p[0] == ['L', 2]:
+        FAppp.append(p[1])
+    
+i = 1
+for index in Dppp:
+    numposD.append('P' + str(i))
+    i += 1
+i2 = 1
+for index in FAppp:
+    numposFA.append('P' + str(i2))
+    i2 += 1
+    
+n1 = len(Dppp)
+n2 = len(FAppp)
+width = 0.35
+
+ind1 = np.arange(n1)
+#ind2 = np.arange(n2)
+fig1, ax1 = plt.subplots()
+#fig2, ax2 = plt.subplots() #probably why second graph doesn't work
+
+graph1 = ax1.bar(ind1, Dppp, width, color='b')
+#graph2 = ax2.bar(ind2, FAppp, width, color='r')
+
+ax1.set_title('Duke: Passes per Possession')
+ax1.set_ylabel('Number of Passes')
+ax1.set_xlabel('Possessions')
+ax1.set_xticks(ind1 + width / 2)
+ax1.set_xticklabels(numposD)
+ax1.legend(graph1[0], 'Duke')
+'''
+ax2.set_title('Florida Atlantic: Passes per Possession')
+ax2.set_ylabel('Number of Passes')
+ax2.set_xlabel('Possessions')
+ax2.set_xticks(ind2 + width / 2)
+ax2.set_xticklabels(numposFA)
+ax2.legend(graph1[0], 'Florida Atlantic')
+'''
 
 #print(possession)
 #print(passes)
