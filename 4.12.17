@@ -121,10 +121,10 @@ for a,b in zip(count,count[1:]):
         poschange += 1
         if b[0] == 1:
             pRight += 1
-            possession.append([poschange,"R",pRight,[b[2]]])
+            possession.append([poschange,["R",1],pRight,[b[2]]])
         elif b[0] == 0:
             pLeft += 1
-            possession.append([poschange,"L",pLeft,[b[2]]])
+            possession.append([poschange,["L",2],pLeft,[b[2]]])
         for x in possession:
             if x[0] == poschange-1:
                 x[3].append(a[2])
@@ -172,17 +172,17 @@ for a in possession:
             if x[4] < 1200 and x[2] < 10 and x[5] < 11: #points after game started, determines dist from player when possession changes, dtermines ball height
                 if x[1] != y[1]:
                     if y[1] == z[1]:
-                        if x[0] == 1 and y[0] == 1 and a[1] == 'R':
+                        if x[0] == 1 and y[0] == 1 and a[1][0] == 'R':
                             passesR += 1
                             passes += 1
                             pss += 1
                             #print(x,y)
-                        elif x[0] == 2 and y[0] == 2 and a[1] == 'L':
+                        elif x[0] == 2 and y[0] == 2 and a[1][0] == 'L':
                             passesL += 1
                             passes += 1
                             pss += 1
                             #print(x,y)
-    passperpos.append([[a[1],x[0]],pss]) #has  number of passes in each possession, chould check numbers
+    passperpos.append([a[1],pss]) #has  number of passes in each possession, chould check numbers
 
 #print(possession)
 #print(passes)
