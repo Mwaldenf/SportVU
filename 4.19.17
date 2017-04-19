@@ -183,7 +183,7 @@ for a in possession:
                             pss += 1
                             #print(x,y)
                             startp.append(x[6]) #appends start coordinates to startp
-                            endp.append(z[6]) #appends end coordinates to endp
+                            endp.append(y[6]) #appends end coordinates to endp
                             startt.append(x[4])
                             endt.append(y[4])
                         elif x[0] == 2 and a[1][0] == 'L':
@@ -192,7 +192,7 @@ for a in possession:
                             pss += 1
                             #print(x,y)    
                             startp.append(x[6]) #appends start coordinates to startp
-                            endp.append(z[6]) #appends end coordinates to endp
+                            endp.append(y[6]) #appends end coordinates to endp
                             startt.append(x[4])
                             endt.append(y[4])
                 elif w[1] != v[1] and w[0] != v[0]:
@@ -203,7 +203,7 @@ for a in possession:
                             pss += 1
                             #print(x,y)
                             startp.append(x[6]) #appends start coordinates to startp
-                            endp.append(z[6]) #appends end coordinates to endp
+                            endp.append(y[6]) #appends end coordinates to endp
                             startt.append(x[4])
                             endt.append(y[4])
                         elif x[0] == 2 and a[1][0] == 'L':
@@ -212,7 +212,7 @@ for a in possession:
                             pss += 1
                             #print(x,y)
                             startp.append(x[6]) #appends start coordinates to startp
-                            endp.append(z[6]) #appends end coordinates to endp
+                            endp.append(y[6]) #appends end coordinates to endp
                             startt.append(x[4])
                             endt.append(y[4])
                     '''
