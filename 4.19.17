@@ -4,6 +4,7 @@ import xml.etree.ElementTree as ET
 import math
 import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.patches as mpatches
 
 tree = ET.parse("1MIN H1.XML")
 root = tree.getroot()
