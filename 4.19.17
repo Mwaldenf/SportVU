@@ -324,3 +324,5 @@ ax1.legend("Duke", "FA")
 blue_patch = mpatches.Patch(color='blue', label='Duke')
 red_patch = mpatches.Patch(color='red', label='Florida Atlantic')
 plt.legend(handles=[blue_patch,red_patch])
+
+plt.hist(Dppp, bins=10, range=(0,9), weights=None)
