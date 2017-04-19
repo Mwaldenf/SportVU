@@ -259,8 +259,8 @@ Dppp = []
 FAppp = []
 numposD = []
 numposFA = []
-DHistx = [0]
-FAHistx = [0]
+DHistx = ['0']
+FAHistx = ['0']
 DHisty = []
 FAHisty = []
 
@@ -288,7 +288,7 @@ if numposD != numposFA:
 numpassD = 0 
 for index in DHistx:
     numpassD += 1
-    DHistx.append(numpassD)
+    DHistx.append(str(numpassD))
     if numpassD == max(Dppp):
         break
 
@@ -296,7 +296,7 @@ for index in DHistx:
 numPassFA = 0
 for index in FAHistx:
     numPassFA += 1
-    FAHistx.append(numPassFA)
+    FAHistx.append(str(numPassFA))
     if numPassFA == max(FAppp):
         break
 
