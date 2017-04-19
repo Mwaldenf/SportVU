@@ -259,6 +259,10 @@ Dppp = []
 FAppp = []
 numposD = []
 numposFA = []
+DHistx = [0]
+FAHistx = [0]
+DHisty = []
+FAHisty = []
 
 for p in passperpos:
     if p[0] == ['R', 1]:
@@ -280,6 +284,21 @@ if numposD != numposFA:
         FAppp.append(0)
     else:
         Dppp.append(0)
+
+numpassD = 0 
+for index in DHistx:
+    numpassD += 1
+    DHistx.append(numpassD)
+    if numpassD == max(Dppp):
+        break
+
+    
+numPassFA = 0
+for index in FAHistx:
+    numPassFA += 1
+    FAHistx.append(numPassFA)
+    if numPassFA == max(FAppp):
+        break
 
 n1 = len(Dppp)
 n2 = len(FAppp)
