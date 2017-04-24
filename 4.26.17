@@ -215,36 +215,80 @@ for a in possession:
                             sped.append([x[4],z[4],"L"])
     passperpos.append([a[1],pss]) #has  number of passes in each possession, chould check numbers
 
+nospeed = 0 #to determine how many passes are excluded
 for x in sped: #finds when the ball reached a certain distance from the player
-    for y,z in zip(player,player[1:]): 
-        if y[4] <= x[0] and y[4] >= x[1]: #doesn't yet distinguish between which team passed
-            if y[2] < 2 and z[2] > 2:
+    startt = []
+    endt = []
+    startp = []
+    endp = []
+    for y,z,q in zip(player,player[1:],player[2:]): 
+        if y[4] <= x[0] and y[4] >= x[1] and y[4] != z[4] != q[4]:
+            if y[2] < 2 and z[2] > 2 and q[2] > z[2]:
                 startp.append(y[7])
                 startt.append(y[4])
-            if y[2] > 2 and z[2] < 2:
-                endp.append(z[7])
-                endt.append(z[4])
+            if y[2] > 2 and z[2] < 2 and q[2] < z[2]:
+                endp.append(y[7])
+                endt.append(y[4])
+    if len(startt) == 0 or len(endt) == 0:
+        nospeed += 1
+    elif len(startt) > 1 or len(endt) > 1:
+        if len(startt) > 2 or len(endt) > 2:
+            print("Passing is stupid, 3 or more start or end times were detected for one pass. Must check code") #I hope this never happens; most common occurance addressed; will be addressed more if enough time, if not only adressed if occurs
+        elif len(endt) == 1:
+            if startt[1] < endt[0]:
+                del startt[1]
+                del startp[1]
+            else:
+                del startt[0]
+                del startp[0]
+        elif len(startt) == 1:
+            if endt[0] > startt[0]:
+                del endt[0]
+                del endp[0]
+            else:
+                del endt[1]
+                del endp[1]
+    if len(startt) == 1 and len(endt) == 1:
+        if x[2] == "R":
+            startpR.append(startp[0])
+            endpR.append(endp[0])
+            starttR.append(startt[0])
+            endtR.append(endt[0])
+        elif x[2] == "L":
+            startpL.append(startp[0])
+            endpL.append(endp[0])
+            starttL.append(startt[0])
+            endtL.append(endt[0])
 
 if len(startt) != len(endt):
     print("Error: Speed lists not equal length") #if a start or end point isn't included it'll tell us before the speed gets messed up
 
-def distancese(startp,endp):
-    return math.sqrt((endp[0] - startp[0])**2 + (endp[1] - startp[1])**2) #distance ball travels
-    
-for s,e in zip(startp,endp): #zips the start and end coordinates together
-    passdist.append(distancese(s,e)) #appends the distance of a pass to passdist
+def distancese(startp,endp): #distance formula in code
+    return math.sqrt((endp[0] - startp[0])**2 + (endp[1] - startp[1])**2) 
+
+for s,e in zip(startpR,endpR): #zips the start and end coordianates together
+    passdistR.append(distancese(s,e)) #appends the distance of a pass to passdistR
+
+for s,e in zip(startpL,endpL): #zips the start and end coordianates together
+    passdistL.append(distancese(s,e)) #appends the distance of a pass to passdistL
 
 def passtime(startt,endt): #time the pass takes
     return (startt - endt) 
 
-for s,e in zip(startt, endt): #applies speed function
-    passt.append(passtime(s,e))
+for s,e in zip(starttR, endtR): #applies speed function
+    passtR.append(passtime(s,e))
+
+for s,e in zip(starttL, endtL): 
+    passtL.append(passtime(s,e))
 
 def speedpass(passdist,passt):
     return ((passdist / passt) * (3600/5280)) #finds the speed (r=d/t) and converts ft/sec to mi/hr
 
-for d,t in zip(passdist,passt): #applies function
-    speed.append(speedpass(d,t))
+for d,t in zip(passdistR,passtR): #applies function
+    speedR.append(speedpass(d,t))
+
+for d,t in zip(passdistL,passtL):
+    speedL.append(speedpass(d,t))
 
 print(speed) #in miles per hour, no other characteristics of the pass incuded
 
