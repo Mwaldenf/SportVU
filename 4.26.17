@@ -264,12 +264,14 @@ for x in sped: #finds when the ball reached a certain distance from the player
             else:
                 del endt[1]
                 del endp[1]
-        if startt[0] < endt[0]:
+                '''
+        if startt[0] < endt[0]: #doesn't work, supposed to cut out negative speed
             print(startt)
             del startt
             del endt
             del startp
             del endp
+            '''
     if len(startt) == 1 and len(endt) == 1:
         if x[2] == "R":
             startpR.append(startp[0])
