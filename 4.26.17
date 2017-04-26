@@ -236,7 +236,7 @@ for x in sped: #finds when the ball reached a certain distance from the player
                 endp.append(y[7])
                 endt.append(y[4])
     if len(startt) == 0 or len(endt) == 0:
-        if len(x) >= 9:
+        if len(x) >= 9: 
                 del startt
                 del endt
                 del startp
@@ -247,21 +247,21 @@ for x in sped: #finds when the ball reached a certain distance from the player
             sped.append([x[0]+0.2,x[1],x[2],"Take 2"])
         elif len(endt) == 0:
             sped.append([x[0],x[1]-0.2,x[2],"Take 2"])
-    if len(startt) > 1 and len(endt) > 1:
-        if len(startt) > 2 or len(endt) > 2:
+    if len(startt) > 1 and len(endt) > 1: #if there are more than one start or end times...
+        if len(startt) > 2 or len(endt) > 2: #if there are more than two start or end times...
             print("Passing is stupid, 3 or more start or end times were detected for one pass. Must check code") #I hope this never happens; most common occurance addressed; will be addressed more if enough time, if not only adressed if occurs
-        elif len(endt) == 1:
-            if startt[1] < endt[0]:
+        elif len(endt) == 1: #if only two start time...
+            if startt[1] < endt[0]: #if the second start time is after the end time delete that one
                 del startt[1]
                 del startp[1]
-            else:
+            else: #if both times are before the end time, delete the first start time
                 del startt[0]
                 del startp[0]
-        elif len(startt) == 1:
-            if endt[0] > startt[0]:
+        elif len(startt) == 1: #if two end times...
+            if endt[0] > startt[0]: #if the first end time is before the start time, delete that one
                 del endt[0]
                 del endp[0]
-            else:
+            else: #if both end times are after the start time, delete the second start time
                 del endt[1]
                 del endp[1]
                 '''
