@@ -9,9 +9,9 @@ root = tree.getroot()
 
 #This defines the variables outside of the for loop so it prints anywhere
 ball = []
-T1P1 = []
-T1P2 = []
-T1P3 = []
+T1P1 = [] #Team 1 Player 1
+T1P2 = [] #Team 1 Player 2
+T1P3 = [] #etc
 T1P4 = []
 T1P5 = []
 T2P1 = []
@@ -19,17 +19,16 @@ T2P2 = []
 T2P3 = []
 T2P4 = []
 T2P5 = []
-R1 = []
-R2 = []
-R3 = []
-team1 = []
-team2 = []
-refs = []
-bal = [] 
+R1 = [] #Referee 1
+R2 = [] #Referee 2
+R3 = [] #Referee 3
+team1 = [] #all of team 1
+team2 = [] #all of team 2
+refs = [] #all the refs
+bal = [] #intermediate ball varible
 
-times = []
-timeslst = []
-gameclock = []
+timeslst = [] #list of absolute time
+gameclock = [] #game clock time
 
 for moment in root.iter("moment"):
     locations = moment.get("locations")
