@@ -47,8 +47,8 @@ for moment in root.iter("moment"):
 
 #takes list of points, isolates coordinates, and makes them floats
 for item in bal:
-    coord = item.split(",")
-    thg = [float(x) for x in coord]
+    coord = item.split(",") #splits
+    thg = [float(x) for x in coord] #makes float
     ball.append(thg[2:5])
 
 #consolidates the team data so we don't have to go through 14 for statements
@@ -56,18 +56,18 @@ for item in team1:
     for y in item:
         coord = y.split(",")
         thg = [float(x) for x in coord]
-        if item.index(y) == 0:
+        if item.index(y) == 0: #for index 0 (player 1)...
             T1P1.append(thg[2:4]) #appends x and y coordinates
-        elif item.index(y) == 1:
+        elif item.index(y) == 1: #for index 1 (player 2)...
             T1P2.append(thg[2:4])
-        elif item.index(y) == 2:
+        elif item.index(y) == 2: #etc
             T1P3.append(thg[2:4])
         elif item.index(y) == 3:
             T1P4.append(thg[2:4])
         elif item.index(y) == 4:
             T1P5.append(thg[2:4])          
 
-for item in team2:
+for item in team2: #same but for team 2
     for y in item:
         coord = y.split(",")
         thg = [float(x) for x in coord]
@@ -82,7 +82,7 @@ for item in team2:
         elif item.index(y) == 4:
             T2P5.append(thg[2:4])
             
-for item in refs:
+for item in refs: #same but for referees
     for y in item:
         coord = y.split(",")
         thg = [float(x) for x in coord]
@@ -186,7 +186,7 @@ for a in possession:
             if x[4] < 1200 and x[2] < 9.25 and x[5] < 8: #pints after game started, determines dist from player when possession changes, dtermines ball height
                 if x[1] != y[1]: #simple pass, when no other player interferes with the pass
                     if y[1] == z[1] and x[0] == y[0]: #determines the players are on the same team and the second player holds the ball long enough
-                        if x[0] == 1 and a[1][0] == 'R': 
+                        if x[0] == 1 and a[1][0] == 'R': #if player was on the right team...
                             passesR += 1
                             passes += 1
                             pss += 1
