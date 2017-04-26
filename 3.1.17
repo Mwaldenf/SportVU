@@ -1,8 +1,8 @@
 #3.1.17
 import xml.etree.ElementTree as ET
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import matplotlib.patches as patches
+import matplotlib.pyplot as plt #imports graphing functions
+import matplotlib.animation as animation #imports animation functions
+import matplotlib.patches as patches #imports more stuff for us to draw with 
 
 tree = ET.parse("1MIN H1.XML")
 root = tree.getroot()
@@ -100,18 +100,18 @@ plt.axes()
 fig = plt.figure()
 plt.xlim(-5,100)   #sets the axes so you can see the court
 plt.ylim(-5,60)
-line, = plt.plot([],[], color = '#FFD700', marker = 'o')
-line1, = plt.plot([],[], color = '#0000CD', marker = 'o')
-line2, = plt.plot([],[], color = '#0000CD', marker = 'o')
-line3, = plt.plot([],[], color = '#0000CD', marker = 'o')
-line4, = plt.plot([],[], color = '#0000CD', marker = 'o')
-line5, = plt.plot([],[], color = '#0000CD', marker = 'o')
-line6, = plt.plot([],[], color = '#B22222', marker = 'o')
-line7, = plt.plot([],[], color = '#B22222', marker = 'o')
-line8, = plt.plot([],[], color = '#B22222', marker = 'o')
-line9, = plt.plot([],[], color = '#B22222', marker = 'o')
-line10, = plt.plot([],[], color = '#B22222', marker = 'o')
-line11, = plt.plot([],[], color = 'k', marker = 'o')
+line, = plt.plot([],[], color = '#FFD700', marker = 'o') #plots the ball
+line1, = plt.plot([],[], color = '#0000CD', marker = 'v') #plots each player from T1P1 to T2P5 the rest of the down, also sets different team colors, and shapes
+line2, = plt.plot([],[], color = '#0000CD', marker = 'v')
+line3, = plt.plot([],[], color = '#0000CD', marker = 'v')
+line4, = plt.plot([],[], color = '#0000CD', marker = 'v')
+line5, = plt.plot([],[], color = '#0000CD', marker = 'v')
+line6, = plt.plot([],[], color = '#B22222', marker = '^')
+line7, = plt.plot([],[], color = '#B22222', marker = '^')
+line8, = plt.plot([],[], color = '#B22222', marker = '^')
+line9, = plt.plot([],[], color = '#B22222', marker = '^')
+line10, = plt.plot([],[], color = '#B22222', marker = '^')
+line11, = plt.plot([],[], color = 'k', marker = 'o') #these are the refs
 line12, = plt.plot([],[], color = 'k', marker = 'o')
 line13, = plt.plot([],[], color = 'k', marker = 'o')
 rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
@@ -123,8 +123,8 @@ rectangle2 = plt.Rectangle((75, 17), 19, 16, fill = False,
 circle = plt.Circle((47,25), radius = 6.0 , fill = False, linestyle = '-') #middle circle
 circle1 = plt.Circle((19,25), radius = 6.0 , fill = False, linestyle = '-') #key
 circle2 = plt.Circle((75,25), radius = 6.0 , fill = False, linestyle = '-') #key
-arc = patches.Arc([14,24.9], 23.75, 44, angle=0.0, theta1=270.0, theta2=90.0)
-arc1 = patches.Arc([80,24.9], 23.75, 44, angle=0.0, theta1=90.0, theta2=270.0)
+arc = patches.Arc([14,24.9], 23.75, 44, angle=0.0, theta1=270.0, theta2=90.0) #3 point line
+arc1 = patches.Arc([80,24.9], 23.75, 44, angle=0.0, theta1=90.0, theta2=270.0) #3 point line
 plt.gca().add_patch(rectangle) # gca = get current axis 
 plt.gca().add_patch(rectangle1)
 plt.gca().add_patch(rectangle2)
@@ -154,7 +154,7 @@ plt.gca().add_patch(hoop2)
 
 
 
-
+# these animate everything
 def ball_data():
     for frame in ball:
         x = frame[0]
