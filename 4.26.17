@@ -117,12 +117,12 @@ for b,aa,ab,ac,ad,ae,ba,bb,bc,bd,be,t,g in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P
 
 #puts total possesion number, whether it was Left or Right possession, what possession it was for L or R, and the start and end time
 for a,b in zip(count,count[1:]):
-    if a[0] != b[0]:
+    if a[0] != b[0]: #if there's a change in which team has a possession
         poschange += 1
-        if b[0] == 1:
-            pRight += 1
+        if b[0] == 1: #a 1 means the team in possession is on the right
+            pRight += 1 
             possession.append([poschange,["R",1],pRight,[b[2]]])
-        elif b[0] == 0:
+        elif b[0] == 0: #0 means on the left
             pLeft += 1
             possession.append([poschange,["L",2],pLeft,[b[2]]])
         for x in possession:
@@ -132,15 +132,15 @@ for a,b in zip(count,count[1:]):
         x[3].append(b[2])
 
 #passing
-def distance(ball, player):
+def distance(ball, player): #distance function from the ball to a player
     return math.sqrt((ball[0] - player[0])**2 + (ball[1] - player[1])**2)
 
 for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5,timeslst,gameclock):
     if balll[0] >= 0 and balll[0] <= 94 and balll[1] >= 0 and balll[1] <= 50:
         dist = [distance(balll, AP1),distance(balll, AP2),distance(balll, AP3),distance(balll, AP4),distance(balll, AP5),distance(balll, BP1),distance(balll, BP2),distance(balll, BP3),distance(balll, BP4),distance(balll, BP5)]
-        x = min(dist)
+        x = min(dist) #finds which player is closest to the ball
         if x == distance(balll, AP1):
-            player.append([1,"T1P1",x,t,g,balll[2],AP1,balll]) #(which team), (which player), (distance from ball), (absolute time), (game clock), (ball height), (player coordinates, (ball coordinates)
+            player.append([1,"T1P1",x,t,g,balll[2],AP1,balll]) #[(which team),(which player),(distance from ball),(absolute time),(game clock),(ball height),(player coordinates,(ball coordinates)]
         elif x == distance(balll, AP2):
             player.append([1,"T1P2",x,t,g,balll[2],AP2,balll]) #same as above
         elif x == distance(balll, AP3):
