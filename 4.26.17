@@ -221,7 +221,6 @@ for a in possession:
                             sped.append([x[4],z[4],"L"])
     passperpos.append([a[1],pss]) #has  number of passes in each possession, chould check numbers
 
-nospeed = 0 #to determine how many passes are excluded
 for x in sped: #finds when the ball reached a certain distance from the player
     startt = []
     endt = []
@@ -229,47 +228,47 @@ for x in sped: #finds when the ball reached a certain distance from the player
     endp = []
     for y,z,q in zip(player,player[1:],player[2:]): 
         if y[4] <= x[0] and y[4] >= x[1] and y[4] != z[4] != q[4]:
-            if y[2] < 2 and z[2] > 2 and q[2] > z[2]: #if ball travels away from player, pass starts
+            if y[2] < 2 and z[2] > 2 and q[2] > z[2]:
                 startp.append(y[7])
                 startt.append(y[4])
-            if y[2] > 2 and z[2] < 2 and q[2] < z[2]: #if ball gets closer to player, pass ends
+            if y[2] > 2 and z[2] < 2 and q[2] < z[2]:
                 endp.append(y[7])
                 endt.append(y[4])
     if len(startt) == 0 or len(endt) == 0:
-        nospeed += 1
-        if len(x) >= 9: #hypothetically cuts of repeats
+        if len(x) >= 9:
                 del startt
                 del endt
                 del startp
                 del endp
-        elif len(startt) == 0 and len(endt) == 0: #widens window to look for start and stop
+        if len(startt) == 0 and len(endt) == 0:
             sped.append([x[0]+0.2,x[1]-0.2,x[2],"Take 2"])
         elif len(startt) == 0:
             sped.append([x[0]+0.2,x[1],x[2],"Take 2"])
         elif len(endt) == 0:
             sped.append([x[0],x[1]-0.2,x[2],"Take 2"])
-    if len(startt) > 1 or len(endt) > 1:
+    if len(startt) > 1 and len(endt) > 1:
         if len(startt) > 2 or len(endt) > 2:
             print("Passing is stupid, 3 or more start or end times were detected for one pass. Must check code") #I hope this never happens; most common occurance addressed; will be addressed more if enough time, if not only adressed if occurs
-        elif len(endt) == 1: #if there are more than one starts
-            if startt[1] < endt[0]: #if the start is after the stop...
+        elif len(endt) == 1:
+            if startt[1] < endt[0]:
                 del startt[1]
                 del startp[1]
-            else: #if there are two starts before the stop, delete the first one
+            else:
                 del startt[0]
                 del startp[0]
-        elif len(startt) == 1: #same as above but with ends
+        elif len(startt) == 1:
             if endt[0] > startt[0]:
                 del endt[0]
                 del endp[0]
             else:
                 del endt[1]
                 del endp[1]
-    '''if startt[0] < endt[0]: #should delete negative time, doesn't work
-        del startt
-        del endt
-        del startp
-        del endp'''
+        if startt[0] < endt[0]:
+            print(startt)
+            del startt
+            del endt
+            del startp
+            del endp
     if len(startt) == 1 and len(endt) == 1:
         if x[2] == "R":
             startpR.append(startp[0])
