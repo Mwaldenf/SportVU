@@ -161,22 +161,22 @@ for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3
         elif x == distance(balll, BP5):
             player.append([2,"T2P5",x,t,g,balll[2],BP5,balll])
 
-passperpos = []
-startpR = [] #stores the start coordinated of a pass
-endpR = [] #stores the end coordinateds of a pass
-passdistR = [] #stores the distance traveled in a pass             
-starttR = []
-endtR = []
-passtR = []
-speedR = []
-startpL = [] #stores the start coordinated of a pass
-endpL = [] #stores the end coordinateds of a pass
-passdistL = [] #stores the distance traveled in a pass             
-starttL = []
-endtL = []
-passtL = []
-speedL = []
-sped = []
+passperpos = [] #passes per possession
+startpR = [] #stores the start coordinates of ball for a pass (for right)
+endpR = [] #stores the end coordinates of ball for a pass (for right)
+passdistR = [] #stores the distance traveled in a pass (for right)          
+starttR = [] #start time of the pass (for right)
+endtR = [] #end time of the pass (for right)
+passtR = [] #total pass time of the pass (for right)
+speedR = [] #speed of each pass (for right)
+startpL = [] #stores the start coordinated of a pass (for left)
+endpL = [] #stores the end coordinateds of a pass (for left)
+passdistL = [] #stores the distance traveled in a pass (for left)           
+starttL = [] #start time of pass (for left)
+endtL = [] #end time of passes (for left)
+passtL = [] #total time of pass (for left)
+speedL = [] #speed of passes (for left)
+sped = [] #intermediate variable, has the time period to look for the pass start and end in
 
 #print(player)
 for a in possession:
