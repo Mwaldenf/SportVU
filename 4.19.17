@@ -246,32 +246,33 @@ for s,e in zip (startt, endt):
     passt.append(passtime(s,e))
     print(s-e)
     
-print(passt)
+#print(passt)
 
-print(startt)
+#print(startt)
 
-print (endt)
-# changed z[4] to y[4] in hopesof fixing the times... not sure if it works
+#print (endt)
 
 #graphing pilot plant
 #second one commented out because the labels don't properly work
-Dppp = []
-FAppp = []
-numposD = []
-numposFA = []
 
-for p in passperpos:
-    if p[0] == ['R', 1]:
+#haven't tried all at once, to get graphs we normally comment out all the other graph code
+Dppp = [] #Duke passes per possession
+FAppp = [] #Florida Atlantic passes per possession
+numposD = [] #number of possessions for Duke
+numposFA = [] #number of possessions for Florida Atlantic
+
+for p in passperpos: #for each item in passperpos
+    if p[0] == ['R', 1]: #if the item is for the right team append it to Dppp
         Dppp.append(p[1])
-    elif p[0] == ['L', 2]:
+    elif p[0] == ['L', 2]: #same as above
         FAppp.append(p[1])
     
 i = 1
-for index in Dppp:
-    numposD.append(str(i))
+for index in Dppp: 
+    numposD.append(str(i)) #this is for the x axis of the graph, has numbers 1 - length of string
     i += 1
 i2 = 1
-for index in FAppp:
+for index in FAppp: #same as above
     numposFA.append(str(i2))
     i2 += 1
 
@@ -307,21 +308,22 @@ red_patch = mpatches.Patch(color='red', label='Florida Atlantic')
 plt.legend(handles=[blue_patch,red_patch])
 
 #histogram of passes
-plt.hist(Dppp, bins=10, range=(0,9), weights=None) #can change to FAppp
-plt.title('Histogram of Passes per Possession')
+plt.hist(Dppp, bins=10, range=(0,9), weights=None) #uses histogram function in matplotlib; can change to FAppp
+plt.title('Histogram of Passes per Possession') #title
 plt.ylabel('Frequency of Pass Number')
 plt.xlabel('Number of Passes')
 
+
 #graph for pass speed, can be refined later
-avgpassD = sum(speedR)/len(speedR)
+avgpassD = sum(speedR)/len(speedR) #averages pass speed
 avgpassFA = sum(speedL)/len(speedL)
 width = .35
 
 fig2, ax2 = plt.subplots()
-graph2 = ax2.bar(1, avgpassD, width, color='b'), ax2.bar(1.5, avgpassFA, width, color='r')
-ax2.set_title('Average Speed')
-ax2.set_ylabel('Speed')
-ax2.set_xlabel('Team')
-blue_patch = mpatches.Patch(color='blue', label='Duke')
-red_patch = mpatches.Patch(color='red', label='Florida Atlantic')
-plt.legend(handles=[blue_patch,red_patch])
+graph2 = ax2.bar(1, avgpassD, width, color='b'), ax2.bar(1.5, avgpassFA, width, color='r') #color of bar
+ax2.set_title('Average Speed') #title
+ax2.set_ylabel('Speed in mi/hr') #y-axis label
+ax2.set_xlabel('Team') #x-axis label
+blue_patch = mpatches.Patch(color='blue', label='Duke') #key for Duke
+red_patch = mpatches.Patch(color='red', label='Florida Atlantic') #key for Florida Atlantic
+plt.legend(handles=[blue_patch,red_patch]) #print key
