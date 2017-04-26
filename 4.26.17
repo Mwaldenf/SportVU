@@ -187,29 +187,29 @@ for a in possession:
                 if x[1] != y[1]: #simple pass, when no other player interferes with the pass
                     if y[1] == z[1] and x[0] == y[0]: #determines the players are on the same team and the second player holds the ball long enough
                         if x[0] == 1 and a[1][0] == 'R': #if player was on the right team...
-                            passesR += 1
-                            passes += 1
+                            passesR += 1 #increases pass count for right team
+                            passes += 1 #increaes pass count for all passes
                             pss += 1
                             sped.append([x[4]+0.2,z[4],"R"]) #takes time from before change of closest player to find when pass started
-                        elif x[0] == 2 and a[1][0] == 'L':
+                        elif x[0] == 2 and a[1][0] == 'L': #if player was on left team...
                             passesL += 1
                             passes += 1
                             pss += 1
-                            sped.append([x[4]+0.2,z[4],"L"])
+                            sped.append([x[4]+0.2,z[4],"L"]) #as above
                 elif w[1] != v[1] and w[0] != v[0] and x[1] != z[1] and x[0] == z[0]: #not a simple pass, another player interferes
-                    if w[1] == x[1] == y[1] and x[2] <= 3 and z[2] <= 2.5:
-                        if x[0] == 1 and a[1][0] == 'R':
+                    if w[1] == x[1] == y[1] and x[2] <= 3 and z[2] <= 2.5: #if one player held possession of the ball before the "pass", distance to ball is less than 3 before pass, distance to ball after pass is less than 2.5
+                        if x[0] == 1 and a[1][0] == 'R': #if pass is between right team players in their possession...
                             passesR += 1
                             passes += 1
                             pss += 1
-                            sped.append([x[4],z[4],"R"]) 
-                        elif x[0] == 2 and a[1][0] == 'L':
+                            sped.append([x[4],z[4],"R"]) #as above
+                        elif x[0] == 2 and a[1][0] == 'L': #if left team...
                             passesL += 1
                             passes += 1
                             pss += 1
-                            sped.append([x[4],z[4],"L"])
-                    elif x[2] <= 1.5 and z[2] <= 2:
-                        if x[0] == 1 and a[1][0] == 'R':
+                            sped.append([x[4],z[4],"L"]) #as above
+                    elif x[2] <= 1.5 and z[2] <= 2: #if distance before pass 1.5 and after 2...
+                        if x[0] == 1 and a[1][0] == 'R': #same as above
                             passesR += 1
                             passes += 1
                             pss += 1
@@ -219,13 +219,13 @@ for a in possession:
                             passes += 1
                             pss += 1
                             sped.append([x[4],z[4],"L"])
-    passperpos.append([a[1],pss]) #has  number of passes in each possession, chould check numbers
+    passperpos.append([a[1],pss]) #has  number of passes in each possession
 
 for x in sped: #finds when the ball reached a certain distance from the player
-    startt = []
-    endt = []
-    startp = []
-    endp = []
+    startt = [] #start time of pass
+    endt = [] #end time of pass
+    startp = [] #start point of pass (ball)
+    endp = [] #end point of pass (ball)
     for y,z,q in zip(player,player[1:],player[2:]): 
         if y[4] <= x[0] and y[4] >= x[1] and y[4] != z[4] != q[4]: #if y is in the window of the pass, and there isn't a game stopage...
             if y[2] < 2 and z[2] > 2 and q[2] > z[2]: #if the ball is going away from the player...
@@ -271,7 +271,7 @@ for x in sped: #finds when the ball reached a certain distance from the player
             del startp
             del endp
             '''
-    if len(startt) == 1 and len(endt) == 1:
+    if len(startt) == 1 and len(endt) == 1: #if there is one start time and one end time, assign the data to whichever team the pass was
         if x[2] == "R":
             startpR.append(startp[0])
             endpR.append(endp[0])
