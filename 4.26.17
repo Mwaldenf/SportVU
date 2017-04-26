@@ -228,9 +228,9 @@ for x in sped: #finds when the ball reached a certain distance from the player
     startp = []
     endp = []
     for y,z,q in zip(player,player[1:],player[2:]): 
-        if y[4] <= x[0] and y[4] >= x[1] and y[4] != z[4] != q[4]: #
+        if y[4] <= x[0] and y[4] >= x[1] and y[4] != z[4] != q[4]: #if y is in the window of the pass, and there isn't a game stopage...
             if y[2] < 2 and z[2] > 2 and q[2] > z[2]: #if the ball is going away from the player...
-                startp.append(y[7])
+                startp.append(y[7]) #add the coordinate to startp
                 startt.append(y[4])
             if y[2] > 2 and z[2] < 2 and q[2] < z[2]: #if the ball is going towards the player...
                 endp.append(y[7])
