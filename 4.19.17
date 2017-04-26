@@ -269,43 +269,43 @@ for p in passperpos: #for each item in passperpos
     
 i = 1
 for index in Dppp: 
-    numposD.append(str(i)) #this is for the x axis of the graph, has numbers 1 - length of string
+    numposD.append(str(i)) #this is for the x axis of the graph, has numbers 1, 2, ... (length of string)
     i += 1
 i2 = 1
 for index in FAppp: #same as above
     numposFA.append(str(i2))
     i2 += 1
 
-if numposD != numposFA:
+if numposD != numposFA: #if the teams don't have the same number of possession add a hold position for the shorter one so the graphs include all actual possession
     if numposD > numposFA:
         FAppp.append(0)
     else:
         Dppp.append(0)
 
-n1 = len(Dppp)
+n1 = len(Dppp) #finds number of possessions
 n2 = len(FAppp)
 width = 0.35
 
 ind1 = np.arange(n1)
 #ind2 = np.arange(n2)
-fig1, ax1 = plt.subplots()
+fig1, ax1 = plt.subplots() 
 #fig2, ax2 = plt.subplots() #probably why second graph doesn't work
 
-graph1 = ax1.bar(ind1-width, Dppp, width, color='b'), ax1.bar(ind1, FAppp, width, color='r')
+graph1 = ax1.bar(ind1-width, Dppp, width, color='b'), ax1.bar(ind1, FAppp, width, color='r') #double bar graph, creates the two bars
 #graph2 = ax2.bar(ind2, FAppp, width, color='r')
 
-ax1.set_title('Passes per Possession')
+ax1.set_title('Passes per Possession') #labels axes
 ax1.set_ylabel('Number of Passes')
 ax1.set_xlabel('Possession Number')
-ax1.set_xticks(ind1 + width / 2)
-ax1.set_xticklabels(numposFA)
-ax1.legend(graph1[0], 'Duke',)
+ax1.set_xticks(ind1 + width / 2) #sets width of tick marks
+ax1.set_xticklabels(numposFA) #sets labels, as described above
+ax1.legend(graph1[0], 'Duke',) 
 #Duke, = ax1.bar(Dppp, label='Duke')
 #FA, = ax1.bar(FAppp, label='Florida Atlantic')
-ax1.legend("Duke", "FA")
-blue_patch = mpatches.Patch(color='blue', label='Duke')
+ax1.legend("Duke", "FA") #sets legend/key
+blue_patch = mpatches.Patch(color='blue', label='Duke') #creates color of key
 red_patch = mpatches.Patch(color='red', label='Florida Atlantic')
-plt.legend(handles=[blue_patch,red_patch])
+plt.legend(handles=[blue_patch,red_patch]) #prints key in color
 
 #histogram of passes
 plt.hist(Dppp, bins=10, range=(0,9), weights=None) #uses histogram function in matplotlib; can change to FAppp
