@@ -25,7 +25,7 @@ R3 = [] #Referee 3
 team1 = [] #all of team 1
 team2 = [] #all of team 2
 refs = [] #all the refs
-bal = [] #intermediate ball varible
+bal = [] #intermediate ball variable
 
 timeslst = [] #list of absolute time
 gameclock = [] #game clock time
@@ -57,7 +57,7 @@ for item in team1:
         coord = y.split(",")
         thg = [float(x) for x in coord]
         if item.index(y) == 0:
-            T1P1.append(thg[2:4])
+            T1P1.append(thg[2:4]) #appends x and y coordinates
         elif item.index(y) == 1:
             T1P2.append(thg[2:4])
         elif item.index(y) == 2:
