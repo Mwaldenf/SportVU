@@ -134,10 +134,10 @@ plt.gca().add_patch(circle2)
 plt.gca().add_patch(arc)
 plt.gca().add_patch(arc1)
 plt.plot([47,47], [0,50], color='k', linestyle='-', linewidth=1) #draws a halfcourt line 
-plt.plot([0,19], [19,19], color='k', linestyle='-', linewidth=1)
-plt.plot([0,19], [31,31], color='k', linestyle='-', linewidth=1)
-plt.plot([75,94], [19,19], color='k', linestyle='-', linewidth=1)
-plt.plot([75,94], [31,31], color='k', linestyle='-', linewidth=1)
+plt.plot([0,19], [19,19], color='k', linestyle='-', linewidth=1) #draws part of key
+plt.plot([0,19], [31,31], color='k', linestyle='-', linewidth=1) #draws part of key
+plt.plot([75,94], [19,19], color='k', linestyle='-', linewidth=1) #draw part of key
+plt.plot([75,94], [31,31], color='k', linestyle='-', linewidth=1) #draws part of key 
 plt.plot([4,4], [22,28], color = 'k', linestyle='-', linewidth=1)
 plt.plot([90,90], [22,28], color = 'k', linestyle='-', linewidth=1)
 #finishes 3-point line
