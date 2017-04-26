@@ -313,6 +313,18 @@ for d,t in zip(passdistR,passtR): #applies function
 for d,t in zip(passdistL,passtL):
     speedL.append(speedpass(d,t))
 
+v = 0
+for x in speedR:
+    if x < 0: #if speed negative, deletes speed
+        del speedR[v] 
+    v += 1
+
+q  = 0
+for x in speedL:
+    if x < 0: #if speed negative, deletes speed
+        del speedL[q]
+    q += 1
+
 print(speedR) #in miles per hour, no other characteristics of the pass incuded
 print(speedL)
 
