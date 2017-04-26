@@ -331,3 +331,299 @@ print(speedL)
 print("Duke = ", passesR)
 print("Florida = ", passesL)
 print(passperpos)
+
+
+#some updated animation stuff 
+
+import xml.etree.ElementTree as ET
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import matplotlib.patches as patches
+
+tree = ET.parse("1MIN H1.XML")
+root = tree.getroot()
+
+#This defines the variables outside of the for loop so it prints anywhere
+ball = []
+T1P1 = []
+T1P2 = []
+T1P3 = []
+T1P4 = []
+T1P5 = []
+T2P1 = []
+T2P2 = []
+T2P3 = []
+T2P4 = []
+T2P5 = []
+R1 = []
+R2 = []
+R3 = []
+team1 = []
+team2 = []
+refs = []
+bal = []
+norefs = [ball, T1P1, T1P2, T1P3, T1P4, T1P5, T2P1, T2P2, T2P3, T2P4, T2P5]
+times = []
+timeslst = []
+for moment in root.iter("moment"):
+    locations = moment.get("locations")
+    places = locations.split(";")   #splits location data
+    if len(places) != 14: # if there arent 14 indexes in a place then it skips that moment 
+        del moment
+    else: #runs code as usual 
+        time0 = moment.get("time")
+        timeslst.append(int(time0)) #organizes times into a list 
+        bal.append(places[0])
+        team1.append(places[1:6])
+        team2.append(places[6:11]) 
+        refs.append(places[11:14])
+
+#takes list of points, isolates coordinates, and makes them floats
+for item in bal:
+    coord = item.split(",")
+    thg = [float(x) for x in coord]
+    ball.append(thg[2:4])
+
+#consolidates the team data so we don't have to go through 14 for statements
+for item in team1:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T1P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T1P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T1P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T1P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T1P5.append(thg[2:4])
+
+for item in team2:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T2P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T2P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T2P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T2P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T2P5.append(thg[2:4])
+            
+for item in refs:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            R1.append(thg[2:4])
+        elif item.index(y) == 1:
+            R2.append(thg[2:4])
+        elif item.index(y) == 2:
+            R3.append(thg[2:4])
+
+
+
+#ball animation
+plt.axes()
+
+fig = plt.figure()
+plt.xlim(-5,100)   #sets the axes so you can see the court
+plt.ylim(-5,60)
+line, = plt.plot([],[], color = '#FFD700', marker = 'o', markersize = 7)
+line1, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
+line2, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
+line3, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
+line4, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
+line5, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
+line6, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
+line7, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
+line8, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
+line9, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
+line10, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
+#line11, = plt.plot([],[], color = 'k', marker = '*')
+#line12, = plt.plot([],[], color = 'k', marker = '*')
+#line13, = plt.plot([],[], color = 'k', marker = '*')
+rectangle = plt.Rectangle((0, 0), 94, 50, fill = False, 
+                          linestyle = '-') #draws the court in the correct dimensions
+rectangle1 = plt.Rectangle((0, 17), 19, 16, fill = False, 
+                          linestyle = '-') #free throw box
+rectangle2 = plt.Rectangle((75, 17), 19, 16, fill = False, 
+                          linestyle = '-') #free throw box
+circle = plt.Circle((47,25), radius = 6.0 , fill = False, linestyle = '-') #middle circle
+circle1 = plt.Circle((19,25), radius = 6.0 , fill = False, linestyle = '-') #key
+circle2 = plt.Circle((75,25), radius = 6.0 , fill = False, linestyle = '-') #key
+arc = patches.Arc([14,24.9], 23.75, 44, angle=0.0, theta1=270.0, theta2=90.0)
+arc1 = patches.Arc([80,24.9], 23.75, 44, angle=0.0, theta1=90.0, theta2=270.0)
+plt.gca().add_patch(rectangle) # gca = get current axis 
+plt.gca().add_patch(rectangle1)
+plt.gca().add_patch(rectangle2)
+plt.gca().add_patch(circle)
+plt.gca().add_patch(circle1)
+plt.gca().add_patch(circle2)
+plt.gca().add_patch(arc)
+plt.gca().add_patch(arc1)
+plt.plot([47,47], [0,50], color='k', linestyle='-', linewidth=1) #draws a halfcourt line 
+plt.plot([0,19], [19,19], color='k', linestyle='-', linewidth=1) #draws part of key 
+plt.plot([0,19], [31,31], color='k', linestyle='-', linewidth=1) #draws part of key 
+plt.plot([75,94], [19,19], color='k', linestyle='-', linewidth=1) #draws part of key 
+plt.plot([75,94], [31,31], color='k', linestyle='-', linewidth=1) #draws part of key 
+plt.plot([4,4], [22,28], color = 'k', linestyle='-', linewidth=1)
+plt.plot([90,90], [22,28], color = 'k', linestyle='-', linewidth=1)
+#finishes 3-point line
+plt.plot([0,14], [3,3], color='k', linestyle='-', linewidth=1) 
+plt.plot([0,14], [47,47], color='k', linestyle='-', linewidth=1)
+plt.plot([80,94], [3,3], color='k', linestyle='-', linewidth=1) #back board
+plt.plot([80,94], [47,47], color='k', linestyle='-', linewidth=1)#back board
+circle3 = plt.Circle((5.25,25), radius = 0.75 , fill = False, linestyle = '-') #add hoops
+circle4 = plt.Circle((88.75,25), radius = 0.75, fill = False, linestyle = '-')#add hoops
+plt.gca().add_patch(circle3)
+plt.gca().add_patch(circle4)
+
+#these animate each moving object
+def ball_data():
+    for frame in ball:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate(ball_data):                           
+    x, y = ball_data[0], ball_data[1]        
+    line.set_data(x,y)
+
+def T1P1_data():
+    for frame in T1P1:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate1(T1P1_data):                           
+    x, y = T1P1_data[0], T1P1_data[1]        
+    line1.set_data(x,y)
+
+def T1P2_data():
+    for frame in T1P2:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate2(T1P2_data): 
+    x, y = T1P2_data[0], T1P2_data[1]
+    line2.set_data(x,y)
+    
+def T1P3_data():
+    for frame in T1P3:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate3(T1P3_data): 
+    x, y = T1P3_data[0], T1P3_data[1]
+    line3.set_data(x,y)
+    
+def T1P4_data():
+    for frame in T1P4:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate4(T1P4_data): 
+    x, y = T1P4_data[0], T1P4_data[1]
+    line4.set_data(x,y)
+    
+def T1P5_data():
+    for frame in T1P5:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate5(T1P5_data): 
+    x, y = T1P5_data[0], T1P5_data[1]
+    line5.set_data(x,y)
+
+def T2P1_data():
+    for frame in T2P1:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate6(T2P1_data):                           
+    x, y = T2P1_data[0], T2P1_data[1]        
+    line6.set_data(x,y)
+            
+def T2P2_data():
+    for frame in T2P2:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate7(T2P2_data): 
+    x, y = T2P2_data[0], T2P2_data[1]
+    line7.set_data(x,y)
+    
+def T2P3_data():
+    for frame in T2P3:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate8(T2P3_data): 
+    x, y = T2P3_data[0], T2P3_data[1]
+    line8.set_data(x,y)
+    
+def T2P4_data():
+    for frame in T2P4:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate9(T2P4_data): 
+    x, y = T2P4_data[0], T2P4_data[1]
+    line9.set_data(x,y)
+    
+def T2P5_data():
+    for frame in T2P5:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate10(T2P5_data): 
+    x, y = T2P5_data[0], T2P5_data[1]
+    line10.set_data(x,y)
+    
+"""def R1_data():
+    for frame in R1:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate11(R1_data): 
+    x, y = R1_data[0], R1_data[1]
+    line11.set_data(x,y)
+    
+def R2_data():
+    for frame in R2:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate12(R2_data): 
+    x, y = R2_data[0], R2_data[1]
+    line12.set_data(x,y)
+    
+def R3_data():
+    for frame in R3:
+        x = frame[0]
+        y = frame[1]
+        yield x, y
+def animate13(R3_data): 
+    x, y = R3_data[0], R3_data[1]
+    line13.set_data(x,y)"""
+    
+anim = animation.FuncAnimation(fig, animate, ball_data, interval = 25, repeat = True)
+anim1 = animation.FuncAnimation(fig, animate1, T1P1_data, interval = 25, repeat = True)
+anim2 = animation.FuncAnimation(fig, animate2, T1P2_data, interval = 25, repeat = True)
+anim3 = animation.FuncAnimation(fig, animate3, T1P3_data, interval = 25, repeat = True)
+anim4 = animation.FuncAnimation(fig, animate4, T1P4_data, interval = 25, repeat = True)
+anim5 = animation.FuncAnimation(fig, animate5, T1P5_data, interval = 25, repeat = True)
+anim6 = animation.FuncAnimation(fig, animate6, T2P1_data, interval = 25, repeat = True)
+anim7 = animation.FuncAnimation(fig, animate7, T2P2_data, interval = 25, repeat = True)
+anim8 = animation.FuncAnimation(fig, animate8, T2P3_data, interval = 25, repeat = True)
+anim9 = animation.FuncAnimation(fig, animate9, T2P4_data, interval = 25, repeat = True)
+anim10 = animation.FuncAnimation(fig, animate10, T2P5_data, interval = 25, repeat = True)
+#anim11 = animation.FuncAnimation(fig, animate11, R1_data, interval = 25, repeat = True)
+#anim12 = animation.FuncAnimation(fig, animate12, R2_data, interval = 25, repeat = True)
+#anim13 = animation.FuncAnimation(fig, animate13, R3_data, interval = 25, repeat = True)
+
+plt.show()
