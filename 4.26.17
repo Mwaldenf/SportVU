@@ -162,17 +162,23 @@ for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3
             player.append([2,"T2P5",x,t,g,balll[2],BP5,balll])
 
 passperpos = []
-startp = [] #stores the start coordinated of a pass
-endp = [] #stores the end coordinateds of a pass
-passdist = [] #stores the distance traveled in a pass             
-startt = []
-endt = []
-passt = []
-speed = []
+startpR = [] #stores the start coordinated of a pass
+endpR = [] #stores the end coordinateds of a pass
+passdistR = [] #stores the distance traveled in a pass             
+starttR = []
+endtR = []
+passtR = []
+speedR = []
+startpL = [] #stores the start coordinated of a pass
+endpL = [] #stores the end coordinateds of a pass
+passdistL = [] #stores the distance traveled in a pass             
+starttL = []
+endtL = []
+passtL = []
+speedL = []
 sped = []
+
 #print(player)
-#when to put exlude passes if not within team with posssession
-#exlude all other passes??
 for a in possession:
     pss = 0 #for possession characteristics, can add other things
     for x,y,z,w,v in zip(player,player[1:],player[18:],player[4:],player[5:]):
@@ -231,7 +237,13 @@ for x in sped: #finds when the ball reached a certain distance from the player
                 endt.append(y[4])
     if len(startt) == 0 or len(endt) == 0:
         nospeed += 1
-    elif len(startt) > 1 or len(endt) > 1:
+        elif len(startt) == 0 and len(endt) == 0:
+            sped.append([x[0]+0.2,x[1]-0.2,x[2],"Take 2"])
+        elif len(startt) == 0:
+            sped.append([x[0]+0.2,x[1],x[2],"Take 2"])
+        elif len(endt) == 0:
+            sped.append([x[0],x[1]-0.2,x[2],"Take 2"])
+    if len(startt) > 1 or len(endt) > 1:
         if len(startt) > 2 or len(endt) > 2:
             print("Passing is stupid, 3 or more start or end times were detected for one pass. Must check code") #I hope this never happens; most common occurance addressed; will be addressed more if enough time, if not only adressed if occurs
         elif len(endt) == 1:
@@ -248,6 +260,11 @@ for x in sped: #finds when the ball reached a certain distance from the player
             else:
                 del endt[1]
                 del endp[1]
+    '''if startt[0] < endt[0]:
+        del startt
+        del endt
+        del startp
+        del endp'''
     if len(startt) == 1 and len(endt) == 1:
         if x[2] == "R":
             startpR.append(startp[0])
