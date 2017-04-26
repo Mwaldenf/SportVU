@@ -314,7 +314,8 @@ for d,t in zip(passdistR,passtR): #applies function
 for d,t in zip(passdistL,passtL):
     speedL.append(speedpass(d,t))
 
-print(speed) #in miles per hour, no other characteristics of the pass incuded
+print(speedR) #in miles per hour, no other characteristics of the pass incuded
+print(speedL)
 
 print("Duke = ", passesR)
 print("Florida = ", passesL)
