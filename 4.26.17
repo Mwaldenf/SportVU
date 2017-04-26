@@ -228,24 +228,24 @@ for x in sped: #finds when the ball reached a certain distance from the player
     startp = []
     endp = []
     for y,z,q in zip(player,player[1:],player[2:]): 
-        if y[4] <= x[0] and y[4] >= x[1] and y[4] != z[4] != q[4]:
-            if y[2] < 2 and z[2] > 2 and q[2] > z[2]:
+        if y[4] <= x[0] and y[4] >= x[1] and y[4] != z[4] != q[4]: #
+            if y[2] < 2 and z[2] > 2 and q[2] > z[2]: #if the ball is going away from the player...
                 startp.append(y[7])
                 startt.append(y[4])
-            if y[2] > 2 and z[2] < 2 and q[2] < z[2]:
+            if y[2] > 2 and z[2] < 2 and q[2] < z[2]: #if the ball is going towards the player...
                 endp.append(y[7])
                 endt.append(y[4])
     if len(startt) == 0 or len(endt) == 0:
-        if len(x) >= 9: 
+        if len(x) >= 9: #stops the repeat if no start or end time found
                 del startt
                 del endt
                 del startp
                 del endp
-        if len(startt) == 0 and len(endt) == 0:
+        if len(startt) == 0 and len(endt) == 0: #if both start and end have no found times, expand search time interval
             sped.append([x[0]+0.2,x[1]-0.2,x[2],"Take 2"])
-        elif len(startt) == 0:
+        elif len(startt) == 0: #if the start time is empty, expand the start window
             sped.append([x[0]+0.2,x[1],x[2],"Take 2"])
-        elif len(endt) == 0:
+        elif len(endt) == 0: #if the end time is empty, expand the end window
             sped.append([x[0],x[1]-0.2,x[2],"Take 2"])
     if len(startt) > 1 and len(endt) > 1: #if there are more than one start or end times...
         if len(startt) > 2 or len(endt) > 2: #if there are more than two start or end times...
