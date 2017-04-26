@@ -1,9 +1,9 @@
 #4.26.17
 
 import xml.etree.ElementTree as ET
-import math
+import math #imports math fuctions 
 
-tree = ET.parse("1MIN H1.XML")
+tree = ET.parse("1MIN H1.XML") #imports a specific XML file
 root = tree.getroot()
 
 
@@ -25,7 +25,7 @@ R3 = []
 team1 = []
 team2 = []
 refs = []
-bal = []
+bal = [] 
 
 times = []
 timeslst = []
@@ -96,17 +96,17 @@ for item in refs:
 
 #defining a possession and passes
 #possession variables
-pRight = 0
-pLeft = 0
+pRight = 0 #count of possessions on the right side of the court
+pLeft = 0 #count of possession on the left side of the court 
 count = [[3,3]]
-poschange = 0
+poschange = 0 #count of number of times the possesion changes 
 possession = []
 
 #passing variables
-player = []
-passes = 0
-passesR = 0
-passesL = 0
+player = [] #idexes are as follows: team,player id, distance from ball, absolute time, gameclock, ball z coord, player x,y, ball x,y
+passes = 0 #count for total passes
+passesR = 0 #count for passes on the team with right court possesion 
+passesL = 0 #count for passes on the team with left court possesion
 
 
 #isolates time when all players were on one side of the court
