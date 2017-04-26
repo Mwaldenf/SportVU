@@ -306,4 +306,22 @@ blue_patch = mpatches.Patch(color='blue', label='Duke')
 red_patch = mpatches.Patch(color='red', label='Florida Atlantic')
 plt.legend(handles=[blue_patch,red_patch])
 
-plt.hist(Dppp, bins=10, range=(0,9), weights=None)
+#histogram of passes
+plt.hist(Dppp, bins=10, range=(0,9), weights=None) #can change to FAppp
+plt.title('Histogram of Passes per Possession')
+plt.ylabel('Frequency of Pass Number')
+plt.xlabel('Number of Passes')
+
+#graph for pass speed, can be refined later
+avgpassD = sum(speedR)/len(speedR)
+avgpassFA = sum(speedL)/len(speedL)
+width = .35
+
+fig2, ax2 = plt.subplots()
+graph2 = ax2.bar(1, avgpassD, width, color='b'), ax2.bar(1.5, avgpassFA, width, color='r')
+ax2.set_title('Average Speed')
+ax2.set_ylabel('Speed')
+ax2.set_xlabel('Team')
+blue_patch = mpatches.Patch(color='blue', label='Duke')
+red_patch = mpatches.Patch(color='red', label='Florida Atlantic')
+plt.legend(handles=[blue_patch,red_patch])
