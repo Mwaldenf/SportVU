@@ -327,3 +327,13 @@ ax2.set_xlabel('Team') #x-axis label
 blue_patch = mpatches.Patch(color='blue', label='Duke') #key for Duke
 red_patch = mpatches.Patch(color='red', label='Florida Atlantic') #key for Florida Atlantic
 plt.legend(handles=[blue_patch,red_patch]) #print key
+
+#histogram of speed
+plt.hist(speedR, bins=10, alpha=.5, range=(0,40), weights=None, color='b', edgecolor='k') #speed for Right team
+plt.hist(speedL, bins=10, alpha=.5, range=(0,40), weights=None, color='r', edgecolor='k') #speed for Left team
+plt.title('Histogram of Speed of Passes') #title
+plt.ylabel('Frequency of Speed')
+plt.xlabel('Speed (mi/hr)')
+blue_patch = mpatches.Patch(color='blue', alpha=.5, label='Duke') #key for Duke
+red_patch = mpatches.Patch(color='red', alpha=.5, label='Florida Atlantic') #key for Florida Atlantic
+plt.legend(handles=[blue_patch,red_patch])
