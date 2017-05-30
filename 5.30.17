@@ -62,7 +62,8 @@ posinfo = [] #[[pos #],[avg speed],[avg distance],[# passes]]
 passnum = []
 posdist = []
 posspeed = []
-shotmade = []
+shotmade = [1,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,1,1,0,0,1,0,1,1,1,0,0,0,0,1,1,0]
+notincluded = [] #possessions with no calculated speed but with passess exsisting
 
 for moment in root.iter("moment"):
     locations = moment.get("locations")
@@ -335,6 +336,8 @@ for x in posinfo:
         posspeed.append(x[1])
         posdist.append(x[2])
         passnum.append(x[3])
+    else:
+        notincluded.append(x[0])
     
 
 df = pd.DataFrame({ "Avg Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
