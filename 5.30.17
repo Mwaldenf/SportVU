@@ -346,3 +346,21 @@ df = pd.DataFrame({ "Avg Speed" : posspeed,  #creates a pandas dataframe for pos
                    })
 
 print(df) #prints the dataframe
+
+outcome = [1,0,0,0,0,0,1,1,0,0,1,1,0,0,0] #1=made shot; 0=any other response
+
+df = pd.DataFrame({ "Avg Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
+                    "Avg Distance" : posdist,
+                    "# of Passes" : passnum,
+                    "Outcome" : outcome
+                   })
+print(df) #prints the dataframe
+
+X = posinfo
+y = outcome
+
+from sklearn.neighbors import KNeighborsClassifier
+#NOT WORKING COMPLETELY
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X,y)  
+knn.predict(21,10,6)
