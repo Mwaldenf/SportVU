@@ -1,5 +1,8 @@
 #5.30.17
 
+import pandas as pd
+import numpy as np
+
 #pandas variables
 passnum = []
 posdist = []
