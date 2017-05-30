@@ -1,1 +1,18 @@
 #5.30.17
+
+#pandas variables
+passnum = []
+posdist = []
+posspeed = []
+shotmade = []
+
+#pandas for machine learning - setting up data frame
+for x in passperpos:
+    passnum.append(passperpos[1])
+
+df = pd.DataFrame({ "Avg Speed" : posspeed,
+                    "Avg Distance" : posdist,
+                    "# of Passes" : passnum
+                   })
+
+print(df)
