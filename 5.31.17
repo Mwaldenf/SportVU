@@ -48,7 +48,7 @@ for a in posinfo:
         if a[0] == v[2]:
             a.append(v[1])
         
-posinfo1 = []
+posinfo1 = [] #[speed, distance, #passes]
 for x in posinfo:
     if x[3] != 0 and x[1] != 0:
         posinfo1.append(x[1:])
