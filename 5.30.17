@@ -8,7 +8,7 @@ root = tree.getroot()
 
 
 #This defines the variables outside of the for loop so it prints anywhere
-
+#NEW Variables reorganized
 #object variables
 ball = []
 T1P1 = [] #Team 1 Player 1
@@ -57,12 +57,15 @@ speedA = [] #speed of each pass
 posA = []
 sped = [] #intermediate variable, has the time period to look for the pass start and end in
 
-#pandas variables
+#pandas variables for machine learning dataframe
+#NEW
 posinfo = [] #[[pos #],[avg speed],[avg distance],[# passes]]
-passnum = []
-posdist = []
-posspeed = []
-shotmade = [1,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,1,1,0,0,1,0,1,1,1,0,0,0,0,1,1,0]
+passnum = [] #number of passes for possession
+posdist = [] #average distance of passes per possession
+posspeed = [] #average speed of passes per possessioin
+shotmade = [1,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,1,1,0,0,0,1,0,
+            0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,
+            1,1,1,0,0,1,0,1,1,1,0,0,0,0,1,1,0] #if possession ended in a shot (1 - yes, 0 - no)
 notincluded = [] #possessions with no calculated speed but with passess exsisting
 
 for moment in root.iter("moment"):
@@ -306,7 +309,7 @@ for x in speedA:
     f += 1
 
 
-#pandas for machine learning - setting up data frame
+#pandas for machine learning - setting up data frame (NEW)
 for x in possession:
     posinfo.append([x[0]]) #creates a list for each possession
 
@@ -328,16 +331,16 @@ for a in posinfo:
             a.append(v[1])
             
 for x in posinfo:
-    if x[3] != 0 and x[1] != 0:
-        posspeed.append(x[1])
+    if x[3] != 0 and x[1] != 0: #if number of passes is more than one and passes have speed/distance calculated...
+        posspeed.append(x[1]) #append to actual datarame variables
         posdist.append(x[2])
         passnum.append(x[3])
-    elif x[1] == x[2] == x[3] == 0:
-        posspeed.append(x[1])
+    elif x[1] == x[2] == x[3] == 0: #if number of passes is zero and no speed/dist is calculated...
+        posspeed.append(x[1]) #append
         posdist.append(x[2])
         passnum.append(x[3])
-    else:
-        notincluded.append(x[0])
+    else: #if there is a pass but no calculated speed/dist...
+        notincluded.append(x[0]) #append possession number to nonincluded 
     
 
 df = pd.DataFrame({ "Avg Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
@@ -347,14 +350,6 @@ df = pd.DataFrame({ "Avg Speed" : posspeed,  #creates a pandas dataframe for pos
 
 print(df) #prints the dataframe
 
-outcome = [1,0,0,0,0,0,1,1,0,0,1,1,0,0,0] #1=made shot; 0=any other response
-
-df = pd.DataFrame({ "Avg Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
-                    "Avg Distance" : posdist,
-                    "# of Passes" : passnum,
-                    "Outcome" : outcome
-                   })
-print(df) #prints the dataframe
 
 X = posinfo
 y = outcome
