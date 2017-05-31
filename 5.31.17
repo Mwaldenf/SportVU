@@ -58,17 +58,35 @@ for x in posinfo:
         notincluded.append(x[0])
 
 outcome = [1,0,0,0,0,0,1,1,0,0,1,1,0,0,0] #1=made shot; 0=any other response
-'''
-df = pd.DataFrame({ "Avg Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
-                    "Avg Distance" : posdist,
-                    "# of Passes" : passnum,
-                    })
-print(df) #prints the dataframe
-'''
+#outcome = [1,1,1,1,1,1,0,0,1,1,1,1,1,0,1]
 
+from sklearn.linear_model import LogisticRegression
+from sklearn import metrics
 
 X = posinfo1
 y = outcome
+
+logreg = LogisticRegression()
+
+logreg.fit(X, y)
+
+#X_new = [20,10,4]
+y_pred = logreg.predict(X)
+
+print(logreg.predict(X))
+
+print(metrics.accuracy_score(y, y_pred))
+
+'''
+from sklearn.neighbors import KNeighborsClassifier
+
+X = posinfo1
+y = outcome
+
+knn = KNeighborsClassifier(n_neighbors=5)
+knn.fit(X,y)
+#print(knn.predict([6,10,21]))
+'''
 newpos= [6,10,21]
 
 from sklearn.neighbors import KNeighborsClassifier
