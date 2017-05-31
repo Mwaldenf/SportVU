@@ -75,4 +75,4 @@ from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X,y)
-print(knn.predict([15,6,10,21]))
+print(knn.predict([15,6,10,21])) #need to remove possession number
