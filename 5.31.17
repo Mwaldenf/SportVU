@@ -67,11 +67,11 @@ print(df) #prints the dataframe
 '''
 
 
-X = posinfo
+X = posinfo1
 y = outcome
 
 from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X,y)
-print(knn.predict([6,10,21])) #need to remove possession number
+print(knn.predict([6,10,21]))
