@@ -69,9 +69,15 @@ print(df) #prints the dataframe
 
 X = posinfo1
 y = outcome
+newpos= [6,10,21]
 
 from sklearn.neighbors import KNeighborsClassifier
 
 knn = KNeighborsClassifier(n_neighbors=5)
 knn.fit(X,y)
-print(knn.predict([6,10,21]))
+knn.predict(newpos)
+
+if knn.predict(newpos) == 1:
+    print('Shot made!')
+else:
+    print('Unsuccessful Possession.')
