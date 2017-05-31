@@ -96,6 +96,6 @@ knn.fit(X,y)
 knn.predict(newpos)
 
 if knn.predict(newpos) == 1:
-    print('Shot made!')
+    print('Shot attempted.')
 else:
-    print('Unsuccessful Possession.')
+    print('No shot.')
