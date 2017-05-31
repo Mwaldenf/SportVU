@@ -91,7 +91,7 @@ newpos= [6,10,21]
 
 from sklearn.neighbors import KNeighborsClassifier
 
-knn = KNeighborsClassifier(n_neighbors=8)
+knn = KNeighborsClassifier(n_neighbors=4)
 knn.fit(X,y)
 response = knn.predict(newpos)
 '''
