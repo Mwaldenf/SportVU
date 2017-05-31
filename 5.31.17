@@ -1,1 +1,27 @@
 #5.31.17
+
+#Iris data set example
+
+from sklearn.datasets import load_iris
+
+iris = load_iris()
+
+X = iris.data
+y = iris.target
+
+X_new = [[3,5,4,2],[5,4,3,2]]
+'''
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=1)
+knn.fit(X, y)
+knn.predict([3,5,4,2])
+
+print(iris)
+'''
+from sklearn.linear_model import LogisticRegression
+
+logreg = LogisticRegression()
+logreg.fit(X, y)
+
+print(logreg.predict(X_new))
