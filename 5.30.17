@@ -342,10 +342,12 @@ for x in posinfo:
     else: #if there is a pass but no calculated speed/dist...
         notincluded.append(x[0]) #append possession number to nonincluded 
     
+outcome = [1,0,0,0,0,0,1,1,0,0,1,1,0,0,0] #1=made shot; 0=any other response
 
 df = pd.DataFrame({ "Avg Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
                     "Avg Distance" : posdist,
-                    "# of Passes" : passnum
+                    "# of Passes" : passnum,
+                    "Outcome" : outcome #or shotmade for all half 1 data
                    })
 
 print(df) #prints the dataframe
