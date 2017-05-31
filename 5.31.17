@@ -192,3 +192,16 @@ ax.set_zlabel("3rd eigenvector")
 ax.w_zaxis.set_ticklabels([])
 
 plt.show()
+
+
+#this sorts the possession by their outcome 
+outcome = [1,0,0,0,1,1,0,0,1,0,1,0,0,0,0] #1=made shot; 0=any other response
+
+df = pd.DataFrame({ "Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
+                    "Distance" : posdist,
+                    "Number_Passes" : passnum,
+                    "Outcome" : outcome})
+    
+df1 = df.sort(["Outcome"])
+print(df1)
+    
