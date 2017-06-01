@@ -15,7 +15,7 @@ from sklearn import metrics
 from sklearn.cross_validation import train_test_split
 from sklearn.cross_validation import cross_val_score
 
-scores = cross_val_score(knn, X, y, cv=5, scoring='accuracy')
+scores = cross_val_score(knn, X, y, cv=4, scoring='accuracy')
 print(scores)
 print(scores.mean())
 
@@ -23,7 +23,7 @@ kRange = range(1,28)
 kScores = []
 for k in kRange:
     knn = KNeighborsClassifier(n_neighbors=k)
-    scores = cross_val_score(knn, X, y, cv=5, scoring='accuracy')
+    scores = cross_val_score(knn, X, y, cv=4, scoring='accuracy')
     kScores.append(scores.mean())
 print(kScores)
 '''
