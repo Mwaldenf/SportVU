@@ -40,3 +40,17 @@ if response == 1:
     print('Shot made!')
 else:
     print('No shot made.')
+    
+    
+#outcome list and stripplot code
+outcome = [2,1,1,1,2,2,0,0,2,1,2,1,1,2,1,1,2,2,0,1,1,2,1,1,2,1,2,1,1,0,0,1,0,2,1,0,2,2,2,1,1,1,0,1,2,2,2,0,2,2,1,2,2,2,2,0,1,1,2,2,1] #2=made shot; 1-miss shot 0=no shot
+
+df = pd.DataFrame({ "Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
+                    "Distance" : posdist,
+                    "Number_Passes" : passnum,
+                    "Outcome" : outcome})
+
+#only prints one a at a time
+#sns.stripplot(x="Outcome", y="Number_Passes", data=df);
+#sns.stripplot(x="Outcome", y="Distance", data=df);
+sns.stripplot(x="Outcome", y="Speed", data=df);
