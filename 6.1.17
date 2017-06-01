@@ -6,7 +6,7 @@ newpos= [2,1,14]
 
 from sklearn.neighbors import KNeighborsClassifier
 
-knn = KNeighborsClassifier(n_neighbors=7)
+knn = KNeighborsClassifier(n_neighbors=7, weights='uniform')
 knn.fit(X,y)
 response = knn.predict(newpos) 
 print(knn.predict(X))
