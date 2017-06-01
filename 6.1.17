@@ -2,7 +2,7 @@
 
 X = posinfo1
 y = outcome
-newpos= [2,1,14]
+newpos= [2,1,13]
 
 from sklearn.neighbors import KNeighborsClassifier
 
