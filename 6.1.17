@@ -1,1 +1,42 @@
 #6.1.17
+
+X = posinfo1
+y = outcome
+newpos= [2,1,14]
+
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=7)
+knn.fit(X,y)
+response = knn.predict(newpos) 
+print(knn.predict(X))
+
+from sklearn import metrics
+from sklearn.cross_validation import train_test_split
+from sklearn.cross_validation import cross_val_score
+
+scores = cross_val_score(knn, X, y, cv=5, scoring='accuracy')
+print(scores)
+print(scores.mean())
+
+kRange = range(1,28)
+kScores = []
+for k in kRange:
+    knn = KNeighborsClassifier(n_neighbors=k)
+    scores = cross_val_score(knn, X, y, cv=5, scoring='accuracy')
+    kScores.append(scores.mean())
+print(kScores)
+'''
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=(25/34))
+
+knn = KNeighborsClassifier(n_neighbors=8)
+knn.fit(X_train,y_train)
+knn.predict(X_test)
+kpred = knn.predict(X_test)
+print(metrics.accuracy_score(y_test,kpred))
+'''
+
+if response == 1:
+    print('Shot made!')
+else:
+    print('No shot made.')
