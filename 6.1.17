@@ -45,7 +45,7 @@ else:
     
     
 #outcome list and stripplot code
-outcome = [2,1,1,1,2,2,0,0,2,1,2,1,1,2,1,1,2,2,0,1,1,2,1,1,2,1,2,1,1,0,0,1,0,2,1,0,2,2,2,1,1,1,0,1,2,2,2,0,2,2,1,2,2,2,2,0,1,1,2,2,1] #2=made shot; 1-miss shot 0=no shot
+h1outcome = [2,1,1,1,2,2,0,0,2,1,2,1,1,2,1,1,2,2,0,1,1,2,1,1,2,1,2,1,1,0,0,1,0,2,1,0,2,2,2,1,1,1,0,1,2,2,2,0,2,2,1,2,2,2,2,0,1,1,2,2,1] #2=made shot; 1-miss shot 0=no shot for half 1
 outcome1 = []
 
 for x in outcome:
@@ -60,7 +60,7 @@ for x in outcome:
 df = pd.DataFrame({ "Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
                     "Distance" : posdist,
                     "Number_Passes" : passnum,
-                    "Outcome" : outcome})
+                    "Outcome" : h1outcome})
 
 #only prints one a at a time
 #sns.stripplot(x="Outcome", y="Number_Passes", data=df);
