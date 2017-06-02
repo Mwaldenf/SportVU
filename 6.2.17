@@ -56,7 +56,7 @@ newpos= [2,1,13,2]
 
 from sklearn.neighbors import KNeighborsClassifier
 
-knn = KNeighborsClassifier(n_neighbors=7, weights='uniform')
+knn = KNeighborsClassifier(n_neighbors=27)
 knn.fit(X,y)
 response = knn.predict(newpos) 
 print('Real', y)
@@ -69,7 +69,7 @@ from sklearn.grid_search import GridSearchCV
 
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=(25/61))
 confusion = metrics.confusion_matrix(y_test, kpred)
-knn = KNeighborsClassifier(n_neighbors=8)
+knn = KNeighborsClassifier(n_neighbors=27)
 knn.fit(X_train,y_train)
 knn.predict(X_test)
 kpred = knn.predict(X_test)
@@ -78,7 +78,7 @@ tp = confusion[1,1] #true positives
 tn = confusion[0,0] #true negatives
 fp = confusion[0,1] #false positives
 fn = confusion[1,0] #false negatives
-print(fp)
+
 acc = metrics.accuracy_score(y_test,kpred)
 inacc = 1 - float(acc)
 sen = tp / float(tp+fn)
@@ -88,3 +88,43 @@ print('Incorrect:', inacc)
 print('Sensitivity:', sen)
 print('Specificity:', spe)
 print(confusion)
+
+scores = cross_val_score(knn, X, y, cv=7, scoring='recall')
+print(scores)
+print(scores.mean())
+
+kRange = []
+kScoresA = []
+kScoresR = []
+for n in range(1,45):
+    kRange.append(n)
+    knn = KNeighborsClassifier(n_neighbors=n)
+    scores = cross_val_score(knn, X, y, cv=7, scoring='accuracy')
+    scores1 = cross_val_score(knn, X, y, cv=7, scoring='recall')
+    kScoresA.append(scores.mean())
+    kScoresR.append(scores1.mean())
+print(kScoresA)
+print(kScoresR)
+
+plt.plot(kRange, kScoresA)
+plt.plot(kRange, kScoresR)
+
+'''
+pgrid = dict(n_neighbors=kRange)
+grid = GridSearchCV(knn, pgrid, cv=7, scoring='recall')
+grid.fit(X,y)
+print(grid.grid_scores_)
+
+scores1 = cross_val_score(knn, X, y, cv=7, scoring='accuracy')
+print(scores1)
+print(scores1.mean())
+
+pgrid1 = dict(n_neighbors=kRange)
+grid1 = GridSearchCV(knn, pgrid1, cv=7, scoring='accuracy')
+grid1.fit(X,y)
+print(grid1.grid_scores_)
+'''
+if response == 1:
+    print('Shot made!')
+else:
+    print('No shot made.')
