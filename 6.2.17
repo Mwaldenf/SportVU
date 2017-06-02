@@ -24,29 +24,28 @@ for a in posinfo:
         if a[0] == v[2]:
             a.append(v[1])
         
-for x in posinfo:
-    if x[3] != 0 and x[1] != 0: #if number of passes is more than one and passes have speed/distance calculated...
-        posspeed.append(x[1]) #append to actual datarame variables
-        posdist.append(x[2])
-        totaldist.append(x[3])
-        passnum.append(x[4])
-    elif x[1] == x[2] == x[3] == 0: #if number of passes is zero and no speed/dist is calculated...
-        posspeed.append(x[1]) #append
-        posdist.append(x[2])
-        totaldist.append(x[3])
-        passnum.append(x[4])
-    else: #if there is a pass but no calculated speed/dist...
-        notincluded.append(x[0]) #append possession number to nonincluded 
-
 
 posinfo1 = [] #[speed, distance, #passes]
 for x in posinfo:
-    if x[3] != 0 and x[1] != 0:
+    if x[4] != 0 and x[1] != 0:
         posinfo1.append(x[1:])
     elif x[1] == x[2] == x[4] == 0:
         posinfo1.append(x[1:])
     else:
         notincluded.append(x[0])
+
+for x in posinfo1:
+    if x[3] != 0 and x[1] != 0: #if number of passes is more than one and passes have speed/distance calculated...
+        posspeed.append(x[0]) #append to actual datarame variables
+        posdist.append(x[1])
+        totaldist.append(x[2])
+        passnum.append(x[3])
+    elif x[1] == x[2] == x[3] == 0: #if number of passes is zero and no speed/dist is calculated...
+        posspeed.append(x[0]) #append
+        posdist.append(x[1])
+        totaldist.append(x[2])
+        passnum.append(x[3])
+
 
 df = pd.DataFrame({ "Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
                     "Avg Distance" : posdist,
