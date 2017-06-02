@@ -21,7 +21,7 @@ for a in posinfo:
     for v in passperpos: #appends number of passes to posinfo if possession number matches
         if a[0] == v[2]:
             a.append(v[1])
-        
+    a.append(a[2]*a[3])        
 
 posinfo1 = [] #[speed, distance, #passes]
 for x in posinfo:
