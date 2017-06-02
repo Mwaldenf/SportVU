@@ -43,7 +43,7 @@ posinfo1 = [] #[speed, distance, #passes]
 for x in posinfo:
     if x[3] != 0 and x[1] != 0:
         posinfo1.append(x[1:])
-    elif x[1] == x[2] == x[3] == 0:
+    elif x[1] == x[2] == x[4] == 0:
         posinfo1.append(x[1:])
     else:
         notincluded.append(x[0])
