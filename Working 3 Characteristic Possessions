@@ -1,0 +1,355 @@
+import xml.etree.ElementTree as ET
+import math #imports math fuctions 
+import pandas as pd #imports pandas for machine learning
+import matplotlib.pyplot as plt
+tree = ET.parse("ALL DATA H1.XML") #imports a specific XML file
+root = tree.getroot()
+
+
+#This defines the variables outside of the for loop so it prints anywhere
+
+#object variables
+ball = []
+T1P1 = [] #Team 1 Player 1
+T1P2 = [] #Team 1 Player 2
+T1P3 = [] #etc
+T1P4 = []
+T1P5 = []
+T2P1 = []
+T2P2 = []
+T2P3 = []
+T2P4 = []
+T2P5 = []
+R1 = [] #Referee 1
+R2 = [] #Referee 2
+R3 = [] #Referee 3
+team1 = [] #all of team 1
+team2 = [] #all of team 2
+refs = [] #all the refs
+bal = [] #intermediate ball variable
+
+#time variables
+timeslst = [] #list of absolute time
+gameclock = [] #game clock time
+
+#possession variables
+pRight = 0 #count of possessions on the right side of the court
+pLeft = 0 #count of possession on the left side of the court 
+count = [[3,3]]
+poschange = 0 #count of number of times the possesion changes 
+possession = []
+#passing variables
+player = [] #idexes are as follows: team,player id, distance from ball, absolute time, gameclock, ball z coord, player x,y, ball x,y
+passes = 0 #count for total passes
+passesR = 0 #count for passes on the team with right court possesion 
+passesL = 0 #count for passes on the team with left court possesion
+
+#distance variables
+passperpos = [] #passes per possession
+startpA = [] #stores the start coordinates of ball for a pass
+endpA = [] #stores the end coordinates of ball for a pass
+passdistA = [] #stores the distance traveled in a pass          
+starttA = [] #start time of the pass
+endtA = [] #end time of the pass)
+passtA = [] #total pass time of the pass
+speedA = [] #speed of each pass
+posA = []
+sped = [] #intermediate variable, has the time period to look for the pass start and end in
+
+#pandas variables
+posinfo = [] #[[pos #],[avg speed],[avg distance],[# passes]]
+passnum = []
+posdist = []
+posspeed = []
+shotmade = [1,0,0,0,0,0,1,1,0,0,1,1,0,0,0,0,1,0,0,1,1,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,0,0,0,1,1,1,0,0,0,0,1,1,1,1,1,1,0,0,1,0,1,1,1,0,0,0,0,1,1,0]
+notincluded = [] #possessions with no calculated speed but with passess exsisting
+
+for moment in root.iter("moment"):
+    locations = moment.get("locations")
+    places = locations.split(";")   #splits location data
+    if len(places) != 14: # if there arent 14 indexes in a place then it skips that moment 
+        del moment
+    else: #runs code as usual 
+        time = moment.get("time")
+        timeslst.append(int(time)) #organizes times into a list 
+        clock = moment.get("game-clock")
+        gameclock.append(float(clock))
+        bal.append(places[0])
+        team1.append(places[1:6])
+        team2.append(places[6:11]) 
+        refs.append(places[11:14])
+
+#takes list of points, isolates coordinates, and makes them floats
+for item in bal:
+    coord = item.split(",") #splits
+    thg = [float(x) for x in coord] #makes float
+    ball.append(thg[2:5])
+
+#consolidates the team data so we don't have to go through 14 for statements
+for item in team1:
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0: #for index 0 (player 1)...
+            T1P1.append(thg[2:4]) #appends x and y coordinates
+        elif item.index(y) == 1: #for index 1 (player 2)...
+            T1P2.append(thg[2:4])
+        elif item.index(y) == 2: #etc
+            T1P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T1P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T1P5.append(thg[2:4])          
+
+for item in team2: #same but for team 2
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            T2P1.append(thg[2:4])
+        elif item.index(y) == 1:
+            T2P2.append(thg[2:4])
+        elif item.index(y) == 2:
+            T2P3.append(thg[2:4])
+        elif item.index(y) == 3:
+            T2P4.append(thg[2:4])
+        elif item.index(y) == 4:
+            T2P5.append(thg[2:4])
+            
+for item in refs: #same but for referees
+    for y in item:
+        coord = y.split(",")
+        thg = [float(x) for x in coord]
+        if item.index(y) == 0:
+            R1.append(thg[2:4])
+        elif item.index(y) == 1:
+            R2.append(thg[2:4])
+        elif item.index(y) == 2:
+            R3.append(thg[2:4])
+
+#defining a possession and passes
+#isolates time when all players were on one side of the court
+for b,aa,ab,ac,ad,ae,ba,bb,bc,bd,be,t,g in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5,timeslst,gameclock):
+    if aa[0] and ab[0] >= 47 and ac[0] >= 47 and ad[0] >= 47 and ae[0] >= 47 and ba[0] >= 47 and bb[0] >= 47 and bc[0] >= 47 and bd[0] >= 47 and be[0] >= 47:
+        count.append([1,t,g])
+    elif aa[0] <= 47 and ab[0] <= 47 and ac[0] <= 47 and ad[0] <= 47 and ae[0] <= 47 and ba[0] <= 47 and bb[0] <= 47 and bc[0] <= 47 and bd[0] <= 47 and be[0] <= 47:
+        count.append([0,t,g])
+
+#puts total possesion number, whether it was Left or Right possession, what possession it was for L or R, and the start and end time
+for a,b in zip(count,count[1:]):
+    if a[0] != b[0]: #if there's a change in which team has a possession
+        poschange += 1
+        if b[0] == 1: #a 1 means the team in possession is on the right
+            pRight += 1 
+            possession.append([poschange,["R",1],pRight,[b[2]]])
+        elif b[0] == 0: #0 means on the left
+            pLeft += 1
+            possession.append([poschange,["L",2],pLeft,[b[2]]])
+        for x in possession:
+            if x[0] == poschange-1:
+                x[3].append(a[2])
+    if count.index(a) == len(count)-2:
+        x[3].append(b[2])
+
+#passing
+def distance(ball, player): #distance function from the ball to a player
+    return math.sqrt((ball[0] - player[0])**2 + (ball[1] - player[1])**2)
+
+for balll,AP1,AP2,AP3,AP4,AP5,BP1,BP2,BP3,BP4,BP5,t,g in zip(ball,T1P1,T1P2,T1P3,T1P4,T1P5,T2P1,T2P2,T2P3,T2P4,T2P5,timeslst,gameclock):
+    if balll[0] >= 0 and balll[0] <= 94 and balll[1] >= 0 and balll[1] <= 50:
+        dist = [distance(balll, AP1),distance(balll, AP2),distance(balll, AP3),distance(balll, AP4),distance(balll, AP5),distance(balll, BP1),distance(balll, BP2),distance(balll, BP3),distance(balll, BP4),distance(balll, BP5)]
+        x = min(dist) #finds which player is closest to the ball
+        if x == distance(balll, AP1):
+            player.append([1,"T1P1",x,t,g,balll[2],AP1,balll]) #[(which team),(which player),(distance from ball),(absolute time),(game clock),(ball height),(player coordinates,(ball coordinates)]
+        elif x == distance(balll, AP2):
+            player.append([1,"T1P2",x,t,g,balll[2],AP2,balll]) #same as above
+        elif x == distance(balll, AP3):
+            player.append([1,"T1P3",x,t,g,balll[2],AP3,balll])
+        elif x == distance(balll, AP4):
+            player.append([1,"T1P4",x,t,g,balll[2],AP4,balll])
+        elif x == distance(balll, AP5):
+            player.append([1,"T1P5",x,t,g,balll[2],AP5,balll])
+        elif x == distance(balll, BP1):
+            player.append([2,"T2P1",x,t,g,balll[2],BP1,balll])
+        elif x == distance(balll, BP2):
+            player.append([2,"T2P2",x,t,g,balll[2],BP2,balll])
+        elif x == distance(balll, BP3):
+            player.append([2,"T2P3",x,t,g,balll[2],BP3,balll])
+        elif x == distance(balll, BP4):
+            player.append([2,"T2P4",x,t,g,balll[2],BP4,balll])
+        elif x == distance(balll, BP5):
+            player.append([2,"T2P5",x,t,g,balll[2],BP5,balll])
+
+
+
+#print(player)
+for a in possession:
+    pss = 0 #for possession characteristics, can add other things
+    for x,y,z,w,v in zip(player,player[1:],player[18:],player[4:],player[5:]):
+        if x[4] <= a[3][0] and x[4] >= a[3][1] and x[4] != y[4] != w[4] != v[4]: #takes coordinates from within a possession only from the team with possession when the clock is running
+            if x[4] < 1200 and x[2] < 9.25 and x[5] < 8: #pints after game started, determines dist from player when possession changes, dtermines ball height
+                if x[1] != y[1]: #simple pass, when no other player interferes with the pass
+                    if y[1] == z[1] and x[0] == y[0]: #determines the players are on the same team and the second player holds the ball long enough
+                        if x[0] == 1 and a[1][0] == 'R': #if player was on the right team...
+                            passesR += 1 #increases pass count for right team
+                            passes += 1 #increaes pass count for all passes
+                            pss += 1
+                            sped.append([x[4]+0.2,z[4],"R"]) #takes time from before change of closest player to find when pass started
+                        elif x[0] == 2 and a[1][0] == 'L': #if player was on left team...
+                            passesL += 1
+                            passes += 1
+                            pss += 1
+                            sped.append([x[4]+0.2,z[4],"L"]) #as above
+                elif w[1] != v[1] and w[0] != v[0] and x[1] != z[1] and x[0] == z[0]: #not a simple pass, another player interferes
+                    if w[1] == x[1] == y[1] and x[2] <= 3 and z[2] <= 2.5: #if one player held possession of the ball before the "pass", distance to ball is less than 3 before pass, distance to ball after pass is less than 2.5
+                        if x[0] == 1 and a[1][0] == 'R': #if pass is between right team players in their possession...
+                            passesR += 1
+                            passes += 1
+                            pss += 1
+                            sped.append([x[4],z[4],"R"]) #as above
+                        elif x[0] == 2 and a[1][0] == 'L': #if left team...
+                            passesL += 1
+                            passes += 1
+                            pss += 1
+                            sped.append([x[4],z[4],"L"]) #as above
+                    elif x[2] <= 1.5 and z[2] <= 2: #if distance before pass 1.5 and after 2...
+                        if x[0] == 1 and a[1][0] == 'R': #same as above
+                            passesR += 1
+                            passes += 1
+                            pss += 1
+                            sped.append([x[4],z[4],"R"])
+                        elif x[0] == 2 and a[1][0] == 'L':
+                            passesL += 1
+                            passes += 1
+                            pss += 1
+                            sped.append([x[4],z[4],"L"])
+    passperpos.append([a[1],pss,a[0]]) #has  number of passes in each possession
+
+for x in sped: #finds when the ball reached a certain distance from the player
+    startt = [] #start time of pass
+    endt = [] #end time of pass
+    startp = [] #start point of pass (ball)
+    endp = [] #end point of pass (ball)
+    for y,z,q in zip(player,player[1:],player[2:]): 
+        if y[4] <= x[0] and y[4] >= x[1] and y[4] != z[4] != q[4]: #if y is in the window of the pass, and there isn't a game stopage...
+            if y[2] < 2 and z[2] > 2 and q[2] > z[2]: #if the ball is going away from the player...
+                startp.append(y[7]) #add the coordinate to startp
+                startt.append(y[4])
+            if y[2] > 2 and z[2] < 2 and q[2] < z[2]: #if the ball is going towards the player...
+                endp.append(y[7])
+                endt.append(y[4])
+    if len(startt) == 0 or len(endt) == 0:
+        if len(x) >= 9: #stops the repeat if no start or end time found
+                del startt
+                del endt
+                del startp
+                del endp
+        if len(startt) == 0 and len(endt) == 0: #if both start and end have no found times, expand search time interval
+            sped.append([x[0]+0.2,x[1]-0.2,x[2],"Take 2"])
+        elif len(startt) == 0: #if the start time is empty, expand the start window
+            sped.append([x[0]+0.2,x[1],x[2],"Take 2"])
+        elif len(endt) == 0: #if the end time is empty, expand the end window
+            sped.append([x[0],x[1]-0.2,x[2],"Take 2"])
+    if len(startt) > 1 and len(endt) > 1: #if there are more than one start or end times...
+        if len(startt) > 2 or len(endt) > 2: #if there are more than two start or end times...
+            print("Passing is stupid, 3 or more start or end times were detected for one pass. Must check code") #I hope this never happens; most common occurance addressed; will be addressed more if enough time, if not only adressed if occurs
+        elif len(endt) == 1: #if only two start time...
+            if startt[1] < endt[0]: #if the second start time is after the end time delete that one
+                del startt[1]
+                del startp[1]
+            else: #if both times are before the end time, delete the first start time
+                del startt[0]
+                del startp[0]
+        elif len(startt) == 1: #if two end times...
+            if endt[0] > startt[0]: #if the first end time is before the start time, delete that one
+                del endt[0]
+                del endp[0]
+            else: #if both end times are after the start time, delete the second start time
+                del endt[1]
+                del endp[1]
+    if len(startt) == 1 and len(endt) == 1: #if there is one start time and one end time, assign the data to whichever team the pass was
+        startpA.append(startp[0])
+        endpA.append(endp[0])
+        starttA.append(startt[0])
+        endtA.append(endt[0])
+        for x in possession:
+            if startt[0] <= x[3][0] and endt[0] >= x[3][1]:
+                posA.append(x[0])
+                
+
+if len(startt) != len(endt):
+    print("Error: Speed lists not equal length") #if a start or end point isn't included it'll tell us before the speed gets messed up
+
+def distancese(startp,endp): #distance formula in code
+    return math.sqrt((endp[0] - startp[0])**2 + (endp[1] - startp[1])**2) 
+
+for s,e in zip(startpA,endpA): #zips the start and end coordianates together
+    passdistA.append(distancese(s,e)) #appends the distance of a pass to passdistR
+
+def passtime(startt,endt): #time the pass takes
+    return (startt - endt) 
+
+for s,e in zip(starttA, endtA): #applies speed function
+    passtA.append(passtime(s,e))
+
+def speedpass(passdist,passt):
+    return ((passdist / passt) * (3600/5280)) #finds the speed (r=d/t) and converts ft/sec to mi/hr
+
+for d,t in zip(passdistA,passtA): #applies function
+    speedA.append(speedpass(d,t))
+
+f  = 0
+for x in speedA:
+    if x < 0: #if speed negative, deletes speed
+        del speedA[f]
+    f += 1
+
+
+#pandas for machine learning - setting up data frame
+for x in possession:
+    posinfo.append([x[0]]) #creates a list for each possession
+
+for a in posinfo:
+    spead = [] #intermediate speed variable
+    disst = [] #intermediate distance variable
+    for x,y,d in zip(posA,speedA,passdistA):
+        if a[0] == x: #if the possession the speed/dist is from is the same as the info list...
+            spead.append(y) #add to intermediate variable
+            disst.append(d)
+    if len(spead) > 0: #if the speed/dist exsits...
+        a.append(sum(spead)/len(spead)) #append average speed to info
+        a.append(sum(disst)/len(disst)) #append average distance to info
+    else: #if empty, append 0; makes it so there is no division by zero
+        a.append(0) 
+        a.append(0)
+    for v in passperpos: #appends number of passes to posinfo if possession number matches
+        if a[0] == v[2]:
+            a.append(v[1])
+            
+for x in posinfo:
+    if x[3] != 0 and x[1] != 0: #if number of passes is more than one and passes have speed/distance calculated...
+        posspeed.append(x[1]) #append to actual datarame variables
+        posdist.append(x[2])
+        passnum.append(x[3])
+    elif x[1] == x[2] == x[3] == 0: #if number of passes is zero and no speed/dist is calculated...
+        posspeed.append(x[1]) #append
+        posdist.append(x[2])
+        passnum.append(x[3])
+    else: #if there is a pass but no calculated speed/dist...
+        notincluded.append(x[0]) #append possession number to nonincluded 
+        
+posinfo1 = []
+for x in posinfo:
+    if x[3] != 0 and x[1] != 0:
+        posinfo1.append(x[1:])
+    elif x[1] == x[2] == x[3] == 0:
+        posinfo1.append(x[1:])
+    else:
+        notincluded.append(x[0])
+        
+
+df = pd.DataFrame({ "Speed" : posspeed,
+                   "Distance" : posdist,
+                   "# Passes": passnum
+                   })
+print(df)
