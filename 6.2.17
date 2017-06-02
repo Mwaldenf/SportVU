@@ -49,3 +49,42 @@ df = pd.DataFrame({ "Speed" : posspeed,  #creates a pandas dataframe for possess
                     "Total Distance" : totaldist,
                     "# Passes" : passnum
                     })
+
+X = posinfo1
+y = outcome1
+newpos= [2,1,13,2]
+
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=7, weights='uniform')
+knn.fit(X,y)
+response = knn.predict(newpos) 
+print('Real', y)
+print('Pred',knn.predict(X))
+
+from sklearn import metrics
+from sklearn.cross_validation import train_test_split
+from sklearn.cross_validation import cross_val_score
+from sklearn.grid_search import GridSearchCV 
+
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=(25/61))
+confusion = metrics.confusion_matrix(y_test, kpred)
+knn = KNeighborsClassifier(n_neighbors=8)
+knn.fit(X_train,y_train)
+knn.predict(X_test)
+kpred = knn.predict(X_test)
+
+tp = confusion[1,1] #true positives
+tn = confusion[0,0] #true negatives
+fp = confusion[0,1] #false positives
+fn = confusion[1,0] #false negatives
+print(fp)
+acc = metrics.accuracy_score(y_test,kpred)
+inacc = 1 - float(acc)
+sen = tp / float(tp+fn)
+spe = tn / float(tn+fp)
+print('Correct:', acc)
+print('Incorrect:', inacc)
+print('Sensitivity:', sen)
+print('Specificity:', spe)
+print(confusion)
