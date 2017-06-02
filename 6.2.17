@@ -15,10 +15,8 @@ for a in posinfo:
     if len(spead) > 0: #if the speed/dist exsits...
         a.append(sum(spead)/len(spead)) #append average speed to info
         a.append(sum(disst)/len(disst)) #append average distance to info
-        a.append(sum(disst))
     else: #if empty, append 0; makes it so there is no division by zero
         a.append(0) 
-        a.append(0)
         a.append(0)
     for v in passperpos: #appends number of passes to posinfo if possession number matches
         if a[0] == v[2]:
@@ -27,9 +25,9 @@ for a in posinfo:
 
 posinfo1 = [] #[speed, distance, #passes]
 for x in posinfo:
-    if x[4] != 0 and x[1] != 0:
+    if x[3] != 0 and x[1] != 0:
         posinfo1.append(x[1:])
-    elif x[1] == x[2] == x[4] == 0:
+    elif x[1] == x[2] == x[3] == 0:
         posinfo1.append(x[1:])
     else:
         notincluded.append(x[0])
@@ -38,14 +36,13 @@ for x in posinfo1:
     if x[3] != 0 and x[1] != 0: #if number of passes is more than one and passes have speed/distance calculated...
         posspeed.append(x[0]) #append to actual datarame variables
         posdist.append(x[1])
-        totaldist.append(x[2])
-        passnum.append(x[3])
+        passnum.append(x[2])
+        totaldist.append(x[3])
     elif x[1] == x[2] == x[3] == 0: #if number of passes is zero and no speed/dist is calculated...
         posspeed.append(x[0]) #append
         posdist.append(x[1])
-        totaldist.append(x[2])
-        passnum.append(x[3])
-
+        passnum.append(x[2])
+        totaldist.append(x[3])
 
 df = pd.DataFrame({ "Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
                     "Avg Distance" : posdist,
