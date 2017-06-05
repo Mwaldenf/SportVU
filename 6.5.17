@@ -15,19 +15,20 @@ for a in posinfo:
     if len(spead) > 0: #if the speed/dist exsits...
         a.append(sum(spead)/len(spead)) #append average speed to info
         a.append(sum(disst)/len(disst)) #append average distance to info
+        a.append(sum(disst))
     else: #if empty, append 0; makes it so there is no division by zero
         a.append(0) 
+        a.append(0)
         a.append(0)
     for v in passperpos: #appends number of passes to posinfo if possession number matches
         if a[0] == v[2]:
             a.append(v[1])
-    a.append(a[2]*a[3])        
 
-posinfo1 = [] #[speed, distance, #passes]
+posinfo1=[]
 for x in posinfo:
-    if x[3] != 0 and x[1] != 0:
+    if x[4] != 0 and x[1] != 0:
         posinfo1.append(x[1:])
-    elif x[1] == x[2] == x[3] == 0:
+    elif x[1] == x[2] == x[4] == 0:
         posinfo1.append(x[1:])
     else:
         notincluded.append(x[0])
@@ -36,19 +37,25 @@ for x in posinfo1:
     if x[3] != 0 and x[1] != 0: #if number of passes is more than one and passes have speed/distance calculated...
         posspeed.append(x[0]) #append to actual datarame variables
         posdist.append(x[1])
-        passnum.append(x[2])
-        totaldist.append(x[3])
+        totaldist.append(x[2])
+        passnum.append(x[3])
     elif x[1] == x[2] == x[3] == 0: #if number of passes is zero and no speed/dist is calculated...
         posspeed.append(x[0]) #append
         posdist.append(x[1])
-        passnum.append(x[2])
-        totaldist.append(x[3])
+        totaldist.append(x[2])
+        passnum.append(x[3])
 
-df = pd.DataFrame({ "Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
-                    "Avg Distance" : posdist,
-                    "Total Distance" : totaldist,
-                    "# Passes" : passnum
-                    })
+#outcome list and stripplot code
+outcome = [2,1,1,1,2,2,0,0,2,1,2,1,1,2,1,1,2,2,0,1,1,2,1,1,2,1,2,1,1,0,0,1,0,2,1,0,2,2,2,1,1,1,0,1,2,2,2,0,2,2,1,2,2,2,2,0,1,1,2,2,1] #2=made shot; 1-miss shot 0=no shot for half 1
+outcome1 = []
+
+for x in outcome:
+    if x == 2:
+        outcome1.append(1)
+    elif x == 1:
+        outcome1.append(0)
+    elif x == 0:
+        outcome1.append(x)
 
 X = posinfo1 #assigns possession data as independent variables for model
 y = outcome1 #assigns outcomes of each possession as dependent variables for model
@@ -64,6 +71,7 @@ response = knn.predict(newpos) #predicts the outcome if new data is plugged in
 print('Real', y) 
 print('Pred',knn.predict(X))
 
+
 from sklearn import metrics
 from sklearn.cross_validation import train_test_split
 from sklearn.cross_validation import cross_val_score
@@ -73,8 +81,8 @@ from sklearn.grid_search import GridSearchCV
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=(25/61)) #test size of 25 data points
 knn = KNeighborsClassifier(n_neighbors=27)
 knn.fit(X_train,y_train)
-knn.predict(X_test)
 kpred = knn.predict(X_test)
+confusion = metrics.confusion_matrix(y_test, kpred)
 
 #creates a confusion matrix showing number of times the model predicted a response for each possible outcome
 confusion = metrics.confusion_matrix(y_test, kpred)
@@ -91,13 +99,18 @@ spe = tn / float(tn+fp)
 print('Correct:', acc)
 print('Incorrect:', inacc)
 print('Sensitivity:', sen) #sensitivity = if actual outcome is positive, rate at which the model predicts positive
-print('Specificity:', spe) #specificity = if actual outcome is negative, rate at which the model predicts negative
+print('Specificity:', spe)#specificity = if actual outcome is negative, rate at which the model predicts negative
 print(confusion)
 
-#divides data into 7 groups and tests each one individually, with everything else acting as training set, and averages the outcomes together (cross-validation)
-scores = cross_val_score(knn, X, y, cv=7, scoring='recall')
+#divides data into 7 groups and tests each one individually, with everything else acting as training set, and averages the recall for each group together (cross-validation)
+scores = cross_val_score(knn, X, y, cv=7, scoring='recall') #recall=sensitivity
 print(scores)
 print(scores.mean())
+
+#does the same thing as above except for accuracy
+scores1 = cross_val_score(knn, X, y, cv=7, scoring='accuracy')
+print(scores1)
+print(scores1.mean())
 
 #tests each value of nearest neighbors for range of 1-44 for accuracy and sensitivity and prints them as a list
 kRange = []
@@ -107,7 +120,7 @@ for n in range(1,45):
     kRange.append(n)
     knn = KNeighborsClassifier(n_neighbors=n)
     scores = cross_val_score(knn, X, y, cv=7, scoring='accuracy')
-    scores1 = cross_val_score(knn, X, y, cv=7, scoring='recall') #recall=sensitivity
+    scores1 = cross_val_score(knn, X, y, cv=7, scoring='recall') 
     kScoresA.append(scores.mean())
     kScoresR.append(scores1.mean())
 print(kScoresA)
@@ -129,6 +142,7 @@ grid1 = GridSearchCV(knn, pgrid1, cv=7, scoring='accuracy')
 grid1.fit(X,y)
 print(grid1.grid_scores_)
 '''
+
 #for newpos, if the response is positive, it expresses that a shot was made; otherwise, it expresses the possession was unsuccessful
 if response == 1:
     print('Shot made!')
