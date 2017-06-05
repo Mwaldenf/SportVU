@@ -1,63 +1,18 @@
 #6.5.17
 
-totaldist = []
-#pandas for machine learning - setting up data frame with new total dist characteristic
-for x in possession:
-    posinfo.append([x[0]]) #creates a list for each possession
 
-for a in posinfo:
-    spead = [] #intermediate speed variable
-    disst = [] #intermediate distance variable
-    for x,y,d in zip(posA,speedA,passdistA):
-        if a[0] == x: #if the possession the speed/dist is from is the same as the info list...
-            spead.append(y) #add to intermediate variable
-            disst.append(d)
-    if len(spead) > 0: #if the speed/dist exsits...
-        a.append(sum(spead)/len(spead)) #append average speed to info
-        a.append(sum(disst)/len(disst)) #append average distance to info
-        a.append(sum(disst))
-    else: #if empty, append 0; makes it so there is no division by zero
-        a.append(0) 
-        a.append(0)
-        a.append(0)
-    for v in passperpos: #appends number of passes to posinfo if possession number matches
-        if a[0] == v[2]:
-            a.append(v[1])
+#NEW - data from the whole game in a csv file so we can seperate the code and the computer doesn't crash
 
-posinfo1=[]
-for x in posinfo:
-    if x[4] != 0 and x[1] != 0:
-        posinfo1.append(x[1:])
-    elif x[1] == x[2] == x[4] == 0:
-        posinfo1.append(x[1:])
-    else:
-        notincluded.append(x[0])
+import csv
 
-for x in posinfo1:
-    if x[3] != 0 and x[1] != 0: #if number of passes is more than one and passes have speed/distance calculated...
-        posspeed.append(x[0]) #append to actual datarame variables
-        posdist.append(x[1])
-        totaldist.append(x[2])
-        passnum.append(x[3])
-    elif x[1] == x[2] == x[3] == 0: #if number of passes is zero and no speed/dist is calculated...
-        posspeed.append(x[0]) #append
-        posdist.append(x[1])
-        totaldist.append(x[2])
-        passnum.append(x[3])
+filename = 'Whole Game Data.data.csv' #file
+raw_data = open(filename, 'rt') #opens file
+reader = csv.reader(raw_data, delimiter=',', quoting=csv.QUOTE_NONE) #reads file
+x = list(reader) 
+data = numpy.array(x).astype('float') #turns file into floats
+outcome1 = [1,0,0,0,1,1,0,0,1,0,1,0,0,1,0,0,1,1,0,0,0,1,0,0,1,0,1,0,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,1,0,1,1,0,1,1,1,1,0,0,0,1,1,0,0,0,0,1,0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,1,1,0,0,0,0,0,1,1,1,0,1,0,0,0,0,0,1,0,0,1,0,0,0,0,1,1,0,1,1,0,1,0,1,0,1,1,1,1,0,1,0,1,0,0]
 
-#outcome list and stripplot code
-outcome = [2,1,1,1,2,2,0,0,2,1,2,1,1,2,1,1,2,2,0,1,1,2,1,1,2,1,2,1,1,0,0,1,0,2,1,0,2,2,2,1,1,1,0,1,2,2,2,0,2,2,1,2,2,2,2,0,1,1,2,2,1] #2=made shot; 1-miss shot 0=no shot for half 1
-outcome1 = []
-
-for x in outcome:
-    if x == 2:
-        outcome1.append(1)
-    elif x == 1:
-        outcome1.append(0)
-    elif x == 0:
-        outcome1.append(x)
-
-X = posinfo1 #assigns possession data as independent variables for model
+X = data #assigns possession data as independent variables for model
 y = outcome1 #assigns outcomes of each possession as dependent variables for model
 newpos= [2,1,13,2] #new data to input into the model
 
