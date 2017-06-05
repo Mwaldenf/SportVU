@@ -1,0 +1,136 @@
+#6.5.17
+
+totaldist = []
+#pandas for machine learning - setting up data frame with new total dist characteristic
+for x in possession:
+    posinfo.append([x[0]]) #creates a list for each possession
+
+for a in posinfo:
+    spead = [] #intermediate speed variable
+    disst = [] #intermediate distance variable
+    for x,y,d in zip(posA,speedA,passdistA):
+        if a[0] == x: #if the possession the speed/dist is from is the same as the info list...
+            spead.append(y) #add to intermediate variable
+            disst.append(d)
+    if len(spead) > 0: #if the speed/dist exsits...
+        a.append(sum(spead)/len(spead)) #append average speed to info
+        a.append(sum(disst)/len(disst)) #append average distance to info
+    else: #if empty, append 0; makes it so there is no division by zero
+        a.append(0) 
+        a.append(0)
+    for v in passperpos: #appends number of passes to posinfo if possession number matches
+        if a[0] == v[2]:
+            a.append(v[1])
+    a.append(a[2]*a[3])        
+
+posinfo1 = [] #[speed, distance, #passes]
+for x in posinfo:
+    if x[3] != 0 and x[1] != 0:
+        posinfo1.append(x[1:])
+    elif x[1] == x[2] == x[3] == 0:
+        posinfo1.append(x[1:])
+    else:
+        notincluded.append(x[0])
+
+for x in posinfo1:
+    if x[3] != 0 and x[1] != 0: #if number of passes is more than one and passes have speed/distance calculated...
+        posspeed.append(x[0]) #append to actual datarame variables
+        posdist.append(x[1])
+        passnum.append(x[2])
+        totaldist.append(x[3])
+    elif x[1] == x[2] == x[3] == 0: #if number of passes is zero and no speed/dist is calculated...
+        posspeed.append(x[0]) #append
+        posdist.append(x[1])
+        passnum.append(x[2])
+        totaldist.append(x[3])
+
+df = pd.DataFrame({ "Speed" : posspeed,  #creates a pandas dataframe for possession passes characteristics 
+                    "Avg Distance" : posdist,
+                    "Total Distance" : totaldist,
+                    "# Passes" : passnum
+                    })
+
+X = posinfo1 #assigns possession data as independent variables for model
+y = outcome1 #assigns outcomes of each possession as dependent variables for model
+newpos= [2,1,13,2] #new data to input into the model
+
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=27) #sets up KNearestNeighbors with an argument of 27 nearest neighbors considered
+knn.fit(X,y) #fits knn with training data of possession info for X and outcomes for y
+response = knn.predict(newpos) #predicts the outcome if new data is plugged in
+
+#compares list of outcomes of training data to what the model predicts when X is plugged back in
+print('Real', y) 
+print('Pred',knn.predict(X))
+
+from sklearn import metrics
+from sklearn.cross_validation import train_test_split
+from sklearn.cross_validation import cross_val_score
+from sklearn.grid_search import GridSearchCV 
+
+#divides training data into set used to train the model, and a testing set used to predict accuracy
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=(25/61))
+knn = KNeighborsClassifier(n_neighbors=27)
+knn.fit(X_train,y_train)
+knn.predict(X_test)
+kpred = knn.predict(X_test)
+
+#creates a confusion matrix showing number of times the model predicted a response for each possible outcome
+confusion = metrics.confusion_matrix(y_test, kpred)
+tp = confusion[1,1] #true positives = number of times 1 is accurately guessed
+tn = confusion[0,0] #true negatives = number of times 0 is accurately guessed
+fp = confusion[0,1] #false positives = number of times 1 is incorrectly guessed
+fn = confusion[1,0] #false negatives = number of times 0 is incorrectly guessed
+
+#prints accuracy, sensitivity, specificity for the train-test-split
+acc = metrics.accuracy_score(y_test,kpred)
+inacc = 1 - float(acc)
+sen = tp / float(tp+fn)
+spe = tn / float(tn+fp)
+print('Correct:', acc)
+print('Incorrect:', inacc)
+print('Sensitivity:', sen) #sensitivity = if actual outcome is positive, rate at which the model predicts positive
+print('Specificity:', spe) #specificity = if actual outcome is negative, rate at which the model predicts negative
+print(confusion)
+
+#divides data into 7 groups and tests each one individually, with everything else acting as training set, and averages the outcomes together (cross-validation)
+scores = cross_val_score(knn, X, y, cv=7, scoring='recall')
+print(scores)
+print(scores.mean())
+
+#tests each value of nearest neighbors for range of 1-44 for accuracy and sensitivity and prints them as a list
+kRange = []
+kScoresA = []
+kScoresR = []
+for n in range(1,45):
+    kRange.append(n)
+    knn = KNeighborsClassifier(n_neighbors=n)
+    scores = cross_val_score(knn, X, y, cv=7, scoring='accuracy')
+    scores1 = cross_val_score(knn, X, y, cv=7, scoring='recall') #recall=sensitivity
+    kScoresA.append(scores.mean())
+    kScoresR.append(scores1.mean())
+print(kScoresA)
+print(kScoresR)
+
+#plots accuracy and recall values for each number of nearest neighbors on one graph
+plt.plot(kRange, kScoresA)
+plt.plot(kRange, kScoresR)
+
+'''
+#like above, prints values for accuracy and recall in lists for each value in kRange, but also displays the parameters
+pgrid = dict(n_neighbors=kRange)
+grid = GridSearchCV(knn, pgrid, cv=7, scoring='recall')
+grid.fit(X,y)
+print(grid.grid_scores_)
+
+pgrid1 = dict(n_neighbors=kRange)
+grid1 = GridSearchCV(knn, pgrid1, cv=7, scoring='accuracy')
+grid1.fit(X,y)
+print(grid1.grid_scores_)
+'''
+#for newpos, if the response is positive, it expresses that a shot was made; otherwise, it expresses the possession was unsuccessful
+if response == 1:
+    print('Shot made!')
+else:
+    print('No shot made.')
