@@ -70,7 +70,7 @@ from sklearn.cross_validation import cross_val_score
 from sklearn.grid_search import GridSearchCV 
 
 #divides training data into set used to train the model, and a testing set used to predict accuracy
-X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=(25/61))
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=(25/61)) #test size of 25 data points
 knn = KNeighborsClassifier(n_neighbors=27)
 knn.fit(X_train,y_train)
 knn.predict(X_test)
