@@ -100,17 +100,17 @@ plt.axes()
 fig = plt.figure()
 plt.xlim(-5,100)   #sets the axes so you can see the court
 plt.ylim(-5,60)
-line, = plt.plot([],[], color = '#FFD700', marker = 'o', markersize = 7) #the ball 
-line1, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10) #t1 starts here
-line2, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
-line3, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
-line4, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
-line5, = plt.plot([],[], color = '#0000CD', marker = 'v', markersize = 10)
-line6, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10) #t2 starts here
-line7, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
-line8, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
-line9, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
-line10, = plt.plot([],[], color = '#B22222', marker = '^', markersize = 10)
+line, = plt.plot([],[], color = '#F09905', marker = 'o', markersize = 7) #the ball 
+line1, = plt.plot([],[], color = '#001A57', marker = 'v', markersize = 10) #t1 starts here
+line2, = plt.plot([],[], color = '#001A57', marker = 'v', markersize = 10)
+line3, = plt.plot([],[], color = '#001A57', marker = 'v', markersize = 10)
+line4, = plt.plot([],[], color = '#001A57', marker = 'v', markersize = 10)
+line5, = plt.plot([],[], color = '#001A57', marker = 'v', markersize = 10)
+line6, = plt.plot([],[], color = '#CC3300', marker = '^', markersize = 10) #t2 starts here
+line7, = plt.plot([],[], color = '#CC3300', marker = '^', markersize = 10)
+line8, = plt.plot([],[], color = '#CC3300', marker = '^', markersize = 10)
+line9, = plt.plot([],[], color = '#CC3300', marker = '^', markersize = 10)
+line10, = plt.plot([],[], color = '#CC3300', marker = '^', markersize = 10)
 #line11, = plt.plot([],[], color = 'k', marker = '*') #the refs
 #line12, = plt.plot([],[], color = 'k', marker = '*')
 #line13, = plt.plot([],[], color = 'k', marker = '*')
@@ -311,4 +311,5 @@ anim10 = animation.FuncAnimation(fig, animate10, T2P5_data, interval = 25, repea
 #anim13 = animation.FuncAnimation(fig, animate13, R3_data, interval = 25, repeat = True)
 
 plt.show()
+
 
