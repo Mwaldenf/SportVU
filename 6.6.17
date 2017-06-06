@@ -2,3 +2,13 @@
 
 outcome = [1,0,0,0,1,1,0,0,1,0,0,0,1,0,1,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,1,0,1,1,0,1,1,1,1,0,0,0,1,1,0,0,0,1,0,0,1,0,1,0,1,0,0,0,1,0,1,1,0,0,0,0,0,1,1,1,0,1,0,0,0,0,1,0,0,1,0,0,0,1,1,0,1,0,0,1,0,1,1,1,1,1,1,0]
 h1outcome = [1,0,0,0,1,1,0,0,1,0,0,0,1,0,1,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,1,0,1,1,0,1,1,1,1,0,0,0,1,1,0]
+
+
+from sklearn.neighbors import KNeighborsClassifier
+
+knn = KNeighborsClassifier(n_neighbors=7) #sets up KNearestNeighbors with an argument of 27 nearest neighbors considered
+knn.fit(X,y) #fits knn with training data of possession info for X and outcomes for y
+
+y_pred = knn.predict(X)
+print(metrics.accuracy_score(y, y_pred))
+print(knn.predict(X))
