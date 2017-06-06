@@ -151,7 +151,41 @@ circle4 = plt.Circle((88.75,25), radius = 0.75, fill = False, linestyle = '-')#a
 plt.gca().add_patch(circle3)
 plt.gca().add_patch(circle4)
 
+#game clock from Muller
+clock = plt.text(0, 52, "Game Clock:")
 
+def clock_data():
+    for t in gameclock:
+        yield t
+
+def clock_animate(clock_data):
+    t = clock_data 
+    minutes = int(t / 60)    
+    seconds = int(t % 60)
+    if seconds < 10:
+        seconds = str(0) + str(seconds)
+    clock.set_text('Game Clock: ' + str(minutes) + ':' + str(seconds))  
+
+
+#what number possession it is
+for t in gameclock:
+    cnt = 0
+    for c in possession:
+        if t <= c[3][0] and t >= c[3][1]:
+            pos.append([c][0][0])
+            cnt += 1
+    if cnt == 0:
+        pos.append("-")
+
+pos1 = plt.text(35, 52, "Possession #:")
+
+
+def pos_data():
+    for p in pos:
+        yield p
+def pos_animate(pos_data):
+    p = pos_data 
+    pos1.set_text('Possession #: ' + str(p))
 
 #these animate each object on the court 
 
@@ -309,7 +343,8 @@ anim10 = animation.FuncAnimation(fig, animate10, T2P5_data, interval = 25, repea
 #anim11 = animation.FuncAnimation(fig, animate11, R1_data, interval = 25, repeat = True)
 #anim12 = animation.FuncAnimation(fig, animate12, R2_data, interval = 25, repeat = True)
 #anim13 = animation.FuncAnimation(fig, animate13, R3_data, interval = 25, repeat = True)
+clock_anim = animation.FuncAnimation(fig, clock_animate, clock_data, interval = 25, repeat = True)
+pos_anim = animation.FuncAnimation(fig, pos_animate, pos_data, interval = 25, repeat = True)
 
 plt.show()
-
 
