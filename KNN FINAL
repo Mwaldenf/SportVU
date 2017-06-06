@@ -1,0 +1,104 @@
+#MACHINE LEARNING FINAL
+import csv
+import numpy as np
+import matplotlib.pyplot as plt
+
+filename = 'Whole Game Data.data.csv' #file
+raw_data = open(filename, 'rt') #opens file
+reader = csv.reader(raw_data, delimiter=',', quoting=csv.QUOTE_NONE) #reads file
+x = list(reader) 
+data = np.array(x).astype('float') #turns file into floats
+outcome1 = [1,0,0,0,1,1,0,0,1,0,0,0,1,0,1,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,1,0,1,1,0,1,1,1,1,0,0,0,1,1,0]
+outcome2 = [1,0,0,0,1,1,0,0,1,0,0,0,1,0,1,1,0,0,0,1,0,0,0,1,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,1,1,1,0,1,1,0,1,1,1,1,0,0,0,1,1,0,0,0,1,0,0,1,0,1,0,1,0,0,0,1,0,1,1,0,0,0,0,0,1,1,1,0,1,0,0,0,0,1,0,0,1,0,0,0,1,1,0,1,0,0,1,0,1,1,1,1,1,1,0]
+
+X = data #assigns possession data as independent variables for model
+y = outcome2 #assigns outcomes of each possession as dependent variables for model
+newpos= [2,1,13,2] #new data to input into the model
+
+from sklearn.neighbors import KNeighborsClassifier as knc
+
+knn = knc(n_neighbors=27) #sets up KNearestNeighbors with an argument of 27 nearest neighbors considered
+knn.fit(X,y) #fits knn with training data of possession info for X and outcomes for y
+response = knn.predict(newpos) #predicts the outcome if new data is plugged in
+
+#compares list of outcomes of training data to what the model predicts when X is plugged back in
+print('Real', y) 
+print('Pred',knn.predict(X))
+
+from sklearn import metrics
+from sklearn.cross_validation import train_test_split
+from sklearn.cross_validation import cross_val_score
+from sklearn.grid_search import GridSearchCV 
+
+#divides training data into set used to train the model, and a testing set used to predict accuracy
+X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=(41/109)) #test size of 25 data points
+knn = knc(n_neighbors=27)
+knn.fit(X_train,y_train)
+kpred = knn.predict(X_test)
+confusion = metrics.confusion_matrix(y_test, kpred)
+
+#creates a confusion matrix showing number of times the model predicted a response for each possible outcome
+confusion = metrics.confusion_matrix(y_test, kpred)
+tp = confusion[1,1] #true positives = number of times 1 is accurately guessed
+tn = confusion[0,0] #true negatives = number of times 0 is accurately guessed
+fp = confusion[0,1] #false positives = number of times 1 is incorrectly guessed
+fn = confusion[1,0] #false negatives = number of times 0 is incorrectly guessed
+
+#prints accuracy, sensitivity, specificity for the train-test-split
+acc = metrics.accuracy_score(y_test,kpred)
+inacc = 1 - float(acc)
+sen = tp / float(tp+fn)
+spe = tn / float(tn+fp)
+print('Correct:', acc)
+print('Incorrect:', inacc)
+print('Sensitivity:', sen) #sensitivity = if actual outcome is positive, rate at which the model predicts positive
+print('Specificity:', spe)#specificity = if actual outcome is negative, rate at which the model predicts negative
+print(confusion)
+
+#divides data into 7 groups and tests each one individually, with everything else acting as training set, and averages the recall for each group together (cross-validation)
+scores = cross_val_score(knn, X, y, cv=10, scoring='recall') #recall=sensitivity
+print(scores)
+print(scores.mean())
+
+#does the same thing as above except for accuracy
+scores1 = cross_val_score(knn, X, y, cv=10, scoring='accuracy')
+print(scores1)
+print(scores1.mean())
+
+#tests each value of nearest neighbors for range of 1-44 for accuracy and sensitivity and prints them as a list
+kRange = []
+kScoresA = []
+kScoresR = []
+for n in range(1,51):
+    kRange.append(n)
+    knn = knc(n_neighbors=n)
+    scores = cross_val_score(knn, X, y, cv=7, scoring='accuracy')
+    scores1 = cross_val_score(knn, X, y, cv=7, scoring='recall') 
+    kScoresA.append(scores.mean())
+    kScoresR.append(scores1.mean())
+print(kScoresA)
+print(kScoresR)
+
+#plots accuracy and recall values for each number of nearest neighbors on one graph
+plt.plot(kRange, kScoresA)
+plt.plot(kRange, kScoresR)
+
+'''
+#like above, prints values for accuracy and recall in lists for each value in kRange, but also displays the parameters
+pgrid = dict(n_neighbors=kRange)
+
+grid = GridSearchCV(knn, pgrid, cv=7, scoring='recall')
+grid.fit(X,y)
+print(grid.grid_scores_)
+
+pgrid1 = dict(n_neighbors=kRange)
+grid1 = GridSearchCV(knn, pgrid1, cv=7, scoring='accuracy')
+grid1.fit(X,y)
+print(grid1.grid_scores_)
+'''
+
+#for newpos, if the response is positive, it expresses that a shot was made; otherwise, it expresses the possession was unsuccessful
+if response == 1:
+    print('Shot made!')
+else:
+    print('No shot made.')
