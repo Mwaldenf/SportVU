@@ -20,6 +20,11 @@ y = outcome #assigns outcomes of each possession as dependent variables for mode
 
 #Random Forests
 
+from sklearn.ensemble import RandomForestClassifier as rfc
+
+rf = rfc(n_estimators=6) #sets up KNearestNeighbors with an argument of 27 nearest neighbors considered
+rf.fit(X,y) #fits knn with training data of possession info for X and outcomes for y
+response = rf.predict(newpos) #predicts the outcome if new data is plugged in
 
 #Neural Networks
 from sklearn.neural_network import MLPClassifier
