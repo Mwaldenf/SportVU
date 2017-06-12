@@ -1,3 +1,5 @@
+#these are the models that we tested but didn't use
+
 import csv
 import numpy
 
